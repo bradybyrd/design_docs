@@ -1,0 +1,11 @@
+<%= form_for(user) do |f| %>
+	<td><%= link_to user.email, user %></td>
+	<td><%= f.text_field :first_name %></td>
+	<td><%= f.text_field :last_name %></td>
+	<td><%= f.select(:customer_id, Customer.unarchived.map{|cust| [cust.name, cust.id] })%></td>
+	<td><%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %></td>
+	<td><%= f.submit 'Update', :class => 'button-xs' %></td>
+<% end %>
+<td>
+  <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+</td>

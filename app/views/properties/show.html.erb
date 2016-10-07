@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @property.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @property.description %>
+</p>
+
+<p>
+  <strong>Holder model:</strong>
+  <%= @property.holder_model %>
+</p>
+
+<p>
+  <strong>Holder:</strong>
+  <%= @property.holder_id %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @property.created_by_id %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @property.created_at %>
+</p>
+
+<%= link_to 'Edit', edit_property_path(@property) %> |
+<%= link_to 'Back', properties_path %>

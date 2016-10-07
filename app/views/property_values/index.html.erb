@@ -1,0 +1,27 @@
+<div class="row">
+  <h4>Property Values</h4>
+  <div class="column">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Holder</th>
+          <th>Data</th>
+          <th>Modified</th>
+    
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @property.current_property_values.each do |property_value| %>
+          <tr>
+            <td><%= h(property_value.holder) %></td>
+            <td><%= h(property_value.data) %></td>
+            <td><%= h(property_value.modifed) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <%= link_to "New User", new_user_path %>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<%= simple_form_for(@property, html: { class: 'form-horizontal' }) do |f| %>
+	<div class='control-group'>
+  <% if @property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul>
+      <% @property.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  	<%= f.error_notification %>
+		<%= f.input :name, required: true, autofocus: true %>
+	</div>
+	<div class='control-group'>
+	 	<%= f.input :description %>
+		<%= f.input :holder_model, collection: Customer.unarchived.map{|cust| [cust.name, cust.id] } %>
+		<%= f.input :holder_id, collection: User.roles.keys.map {|role| [role.titleize,role]} %>
+		<%= f.button :submit %>
+	</div>
+<% end %>

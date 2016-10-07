@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @site.customer_id %>
+</p>
+
+<p>
+  <strong>Address1:</strong>
+  <%= @site.address1 %>
+</p>
+
+<p>
+  <strong>Address2:</strong>
+  <%= @site.address2 %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @site.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @site.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @site.zip %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @site.phone %>
+</p>
+
+<p>
+  <strong>Gps:</strong>
+  <%= @site.gps %>
+</p>
+
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<%= link_to 'Back', sites_path %>
