@@ -16,8 +16,7 @@
 	</div>
 	<div class='control-group'>
 	 	<%= f.input :description %>
-		<%= f.input :holder_model, collection: Customer.unarchived.map{|cust| [cust.name, cust.id] } %>
-		<%= f.input :holder_id, collection: User.roles.keys.map {|role| [role.titleize,role]} %>
+		<%= f.input :holder_model, collection: ["Customer", "Site", "Basin", "SystemSetting"] %>
 		<%= f.button :submit %>
 	</div>
 <% end %>

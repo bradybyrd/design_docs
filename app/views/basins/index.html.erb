@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Basins</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Site</th>
+      <th>Name</th>
+      <th>Depth</th>
+      <th>Width</th>
+      <th>Length</th>
+      <th>Diameter</th>
+      <th>Volume</th>
+      <th>Surface area</th>
+      <th>Side slope ratio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @basins.each do |basin| %>
+      <tr>
+        <td><%= basin.site_id %></td>
+        <td><%= basin.name %></td>
+        <td><%= basin.depth %></td>
+        <td><%= basin.width %></td>
+        <td><%= basin.length %></td>
+        <td><%= basin.diameter %></td>
+        <td><%= basin.volume %></td>
+        <td><%= basin.surface_area %></td>
+        <td><%= basin.side_slope_ratio %></td>
+        <td><%= link_to 'Show', basin %></td>
+        <td><%= link_to 'Edit', edit_basin_path(basin) %></td>
+        <td><%= link_to 'Destroy', basin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Basin', new_basin_path %>

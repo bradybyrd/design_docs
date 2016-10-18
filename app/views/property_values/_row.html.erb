@@ -1,0 +1,21 @@
+<div class="column" style="width: 100%;">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Holder</th>
+        <th>Data</th>
+        <th>Modified</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @property.property_values.ordered.each do |property_value| %>
+        <tr class='<%= property_value.archived? ? 'inactive' : '' %>'>
+          <td><%= h(property_value.holder_name) %></td>
+          <td><%= h(property_value.data) %></td>
+          <td><%= h(property_value.creator) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br><%= link_to "Add Value", '#' %>
+</div>

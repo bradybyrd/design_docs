@@ -5,7 +5,7 @@ class CreatePropertyValues < ActiveRecord::Migration
       t.string :data
       t.datetime :archived_at
       t.integer :archived_by_id
-
+      t.string :archive_number
       t.timestamps null: false
     end
   end

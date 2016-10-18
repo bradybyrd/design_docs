@@ -1,0 +1,27 @@
+<%
+# Should go to properties controller
+# should send referenced_model (e.g. Site)
+# params have property_id and value (multiple)
+# Post to properties via ajax and update page
+# set model record to reference back to in controller action @record
+%>
+<div style="align:right;">
+  <h4><%="#{@record.class.to_s} Properties" %></h4>
+</div>
+
+<%= form_for(@record, html: {class: 'form-horizontal'}) do |f| %>
+  <% if @record.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@record.errors.count, "error") %> prohibited this <%= @record.class.to_s %> from being saved:</h2>
+      <ul>
+      <% @record.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= render partial: 'shared/property_rows', locals: {:f => f} %>
+  <div class='form-actions'>
+    <%= f.submit 'Update' %>
+  </div>
+<% end %>

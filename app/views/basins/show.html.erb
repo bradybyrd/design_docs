@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @basin.site_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @basin.name %>
+</p>
+
+<p>
+  <strong>Depth:</strong>
+  <%= @basin.depth %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @basin.width %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @basin.length %>
+</p>
+
+<p>
+  <strong>Diameter:</strong>
+  <%= @basin.diameter %>
+</p>
+
+<p>
+  <strong>Volume:</strong>
+  <%= @basin.volume %>
+</p>
+
+<p>
+  <strong>Surface area:</strong>
+  <%= @basin.surface_area %>
+</p>
+
+<p>
+  <strong>Side slope ratio:</strong>
+  <%= @basin.side_slope_ratio %>
+</p>
+
+<%= link_to 'Edit', edit_basin_path(@basin) %> |
+<%= link_to 'Back', basins_path %>

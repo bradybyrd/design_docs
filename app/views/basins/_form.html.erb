@@ -1,0 +1,19 @@
+<%= simple_form_for(@basin) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :site_id %>
+    <%= f.input :name %>
+    <%= f.input :depth %>
+    <%= f.input :width %>
+    <%= f.input :length %>
+    <%= f.input :diameter %>
+    <%= f.input :volume %>
+    <%= f.input :surface_area %>
+    <%= f.input :side_slope_ratio %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

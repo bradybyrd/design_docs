@@ -1,0 +1,1 @@
+json.array! @basins, partial: 'basins/basin', as: :basin

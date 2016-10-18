@@ -1,0 +1,1 @@
+json.partial! "basins/basin", basin: @basin

@@ -1,6 +1,15 @@
-<h1>Editing Site</h1>
+<ul class='nav nav-tabs'>
+  <%= layout_tabs(@site) %>
+</ul> 
+<%= link_to '<<Back', sites_path %>
 
-<%= render 'form' %>
+<div class="container">
+  <% if @current_tab == "site_details" %>
+	  <div style="width: 400px;">
+	    <%= render 'form'  %>
+	  </div>
+  <% elsif @current_tab == "properties" %>
+    <%= render 'shared/edit_properties' %>
+  <% end %>
+</div>
 
-<%= link_to 'Show', @site %> |
-<%= link_to 'Back', sites_path %>

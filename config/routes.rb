@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :basins
   resources :customers
   root to: 'dashboard#index'
   resources :properties
