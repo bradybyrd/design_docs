@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_site, only: [:show, :edit, :update, :destroy]
 
   # GET /sites
@@ -44,9 +45,12 @@ class SitesController < ApplicationController
   # PATCH/PUT /sites/1.json
   def update
     respond_to do |format|
+      if params.has_key?("add_property_target_url")
+        @site.update_properties(params["props"]) 
+      end
       if @site.update(site_params)
         set_updater
-        format.html { redirect_to @site, notice: 'Site was successfully updated.' }
+        format.html { redirect_to sites_url, notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
       else
         format.html { render :edit }
@@ -64,7 +68,7 @@ class SitesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+    
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_site
@@ -77,6 +81,8 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
+      #(:customer_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps)
+      #allowed = params.keys.select{|l| }
       params.require(:site).permit(:customer_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps)
     end
 end

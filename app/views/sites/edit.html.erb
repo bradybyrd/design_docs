@@ -5,11 +5,11 @@
 
 <div class="container">
   <% if @current_tab == "site_details" %>
-	  <div style="width: 400px;">
+	  <div style="width: 700px;">
 	    <%= render 'form'  %>
 	  </div>
   <% elsif @current_tab == "properties" %>
-    <%= render 'shared/edit_properties' %>
+    <%= render 'properties/edit_properties' %>
   <% end %>
 </div>
 

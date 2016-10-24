@@ -7,8 +7,9 @@ class Property < ActiveRecord::Base
             uniqueness: { scope: :holder_model }
             
   
-  scope :settings, -> { where(holder_model: 'SystemSetting') }
+  scope :settings, -> { where("holder_model = 'SystemSetting'") }
   scope :ordered, -> { order("archive_number DESC, holder_model, name")}
+  scope :for_model, -> (model) { where("holder_model = ?", model) }
   
   def created
     user = User.find_by_id(created_by_id)

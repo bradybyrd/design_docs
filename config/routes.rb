@@ -2,8 +2,13 @@ Rails.application.routes.draw do
   resources :basins
   resources :customers
   root to: 'dashboard#index'
+  get 'properties/add_new_property' => 'properties#add_new_property'
+  post 'properties/create_new_properties' => 'properties#create_new_properties'
   resources :properties
   resources :sites
+  devise_scope :user do
+    get '/sign-in' => "devise/sessions#new", :as => :login
+  end
   devise_for :users, :path => 'auth', controllers: {confirmations: 'confirmations'} do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end

@@ -7,4 +7,16 @@ class ApplicationController < ActionController::Base
   def set_current_user
     User.current_user = current_user
   end
+  
+  protected
+  
+    def authenticate_user!
+      if user_signed_in?
+        super
+      else
+        redirect_to login_path, :notice => 'Please log in'
+        ## if you want render 404 page
+        ## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+      end
+    end
 end

@@ -61,6 +61,22 @@ class PropertiesController < ApplicationController
     end
   end
 
+  # GET Ajax form get
+  def add_new_property
+    inc = params["form_increment"] || 0
+    @form_increment = inc.to_i + 1
+    val = params["associated_model"]
+    associated_model = val.split("__")[0].camelize
+    associated_model_id = val.split("__")[1]
+    @property_list = Property.for_model(associated_model).unarchived.ordered
+    render layout: false
+  end
+
+  # POST
+  def create_new_properties
+    logger.info params
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property
@@ -69,6 +85,6 @@ class PropertiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.require(:property).permit(:name, :description, :holder_model, :holder_id, :created_by_id, :created_at)
+      params.require(:property).permit(:name, :description, :holder_model, :holder_id, :created_by_id, :created_at, :associated_model, :form_increment)
     end
 end

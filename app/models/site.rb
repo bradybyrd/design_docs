@@ -1,16 +1,17 @@
 class Site < ActiveRecord::Base
   include Archivable
+  include PropertyMethods
   
   STATES = %w(AK AL AR AZ CA CO CT DC DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY)
 
-  
+  has_many :basins
   belongs_to :customer
   
-  def properties
+  def boproperties
     Property.where("holder_model = 'Site' AND archived_at is NULL").order("properties.name")
   end
   
-  def current_property_values
+  def bocurrent_property_values
     #Property.joins("left join property_values on property_values.property_id = properties.id").where("holder_model = 'Site' and property_values.holder_id = ?", self.id)
     #PropertyValue.unarchived.joins(:property).where("property_id in (select id from properties where properties.holder_model = 'Site' and holder_id = #{self.id})")
     sql =<<-END

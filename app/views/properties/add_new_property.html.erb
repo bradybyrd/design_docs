@@ -1,0 +1,15 @@
+<fieldset>
+  <div class='form-group'>
+    <%= label_tag 'choose_property', 'Adding', class: 'col-sm-3 control-label' %>
+    <div class='col-sm-8'>
+      <%= select_tag "props[select_property_id_#{@form_increment}]", options_from_collection_for_select(@property_list, "id", "name") + "\n<option value='-1'>Add new...</option>".html_safe %>
+      <%= text_field_tag "props[new_name_#{@form_increment}]", nil, placeholder: "new property", style: 'display: none;' %>
+      <%= text_field_tag "props[new_data_#{@form_increment}]", nil, placeholder: "new value" %>
+    </div>
+    <%= hidden_field_tag :_destroy %>
+    <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, '#', class: "remove_fields" %>
+  </div>
+</fieldset>
+<div id='add_new_property'>
+  <%= hidden_field_tag "form_increment", @form_increment.to_s %>
+</div>

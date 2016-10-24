@@ -5,7 +5,7 @@ class PropertyValue < ActiveRecord::Base
   before_save :expire_current_values
   
   scope :current, -> { where(archived_at: nil) }
-  scope :for_model, ->(model_name) { where("archived_at is NULL AND model_name = '?'", model_name ) }
+  scope :for, -> (holder_id) { where("archived_at is NULL AND holder_id = '?'", holder_id ) }
   scope :ordered, -> { order("archive_number DESC, updated_at DESC")}
   
   delegate :holder_model, :to => :property
@@ -29,7 +29,7 @@ class PropertyValue < ActiveRecord::Base
   end
   
   def creator
-    u = User.find_by_id(creator_id)
+    u = User.find_by_id(created_by_id)
     arch = self.archived? ? '-archived' : ''
     "#{u.nil? ? "unknown" : u.short_name}-#{created_at.to_s(:simple_time)}#{arch}"
   end

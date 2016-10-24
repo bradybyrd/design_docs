@@ -20,8 +20,8 @@
       </ul>
     </div>
   <% end %>
-  <%= render partial: 'shared/property_rows', locals: {:f => f} %>
-  <div class='form-actions'>
+  <%= render partial: 'properties/property_rows', locals: {:f => f} %>
+  <div class='form-actions text-right'>
     <%= f.submit 'Update' %>
   </div>
 <% end %>
