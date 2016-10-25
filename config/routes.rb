@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
+  # Basins
+  get 'basins/:id/edit_form' => 'basins#edit_form'
   resources :basins
+  # Customers
   resources :customers
+  # Dashboard
   root to: 'dashboard#index'
+  # Properties
   get 'properties/add_new_property' => 'properties#add_new_property'
   post 'properties/create_new_properties' => 'properties#create_new_properties'
   resources :properties
+  # Sites
   resources :sites
+  # Users and Devise
   devise_scope :user do
     get '/sign-in' => "devise/sessions#new", :as => :login
   end

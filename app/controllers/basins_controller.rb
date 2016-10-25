@@ -1,5 +1,6 @@
 class BasinsController < ApplicationController
-  before_action :set_basin, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
+  before_action :set_basin, only: [:show, :edit, :update, :destroy, :edit_form]
 
   # GET /basins
   # GET /basins.json
@@ -19,8 +20,15 @@ class BasinsController < ApplicationController
 
   # GET /basins/1/edit
   def edit
+    @embed = false
   end
 
+  # GET /basins/1/edit_form
+  def edit_form
+    @embed = true
+    render '_form', layout: false
+  end
+  
   # POST /basins
   # POST /basins.json
   def create
@@ -28,7 +36,13 @@ class BasinsController < ApplicationController
 
     respond_to do |format|
       if @basin.save
-        format.html { redirect_to @basin, notice: 'Basin was successfully created.' }
+        format.html { 
+          if params[:embed] && params[:embed] == 'true' 
+            redirect_to @basin, notice: 'Basin was successfully created.' 
+          else
+            redirect_to edit_site_path(@basin.site, tab: 'basins')
+          end
+          }
         format.json { render :show, status: :created, location: @basin }
       else
         format.html { render :new }
@@ -64,11 +78,12 @@ class BasinsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_basin
-      @basin = Basin.find(params[:id])
+      @basin = Basin.new(site_id: params[:site_id]) if params[:id] == "new"
+      @basin = Basin.find(params[:id]) unless params[:id] == "new"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def basin_params
-      params.require(:basin).permit(:site_id, :name, :depth, :width, :length, :diameter, :volume, :surface_area, :side_slope_ratio)
+      params.require(:basin).permit(:site_id, :name, :basin_type, :depth, :width, :length, :diameter, :volume, :surface_area, :side_slope_ratio)
     end
 end

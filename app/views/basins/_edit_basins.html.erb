@@ -1,0 +1,19 @@
+<div style="align:right;">
+  <h4><%="#{@record.name} Basins" %></h4>
+</div>
+
+<div class="row">
+  <div class='col-lg-3'>
+    <ul class='list-group'>
+        <% @record.basins.unarchived.ordered.each do |basin| %>
+          <li class=list-group-item><%= basin.name %> 
+            <span style="float: right;"><%= link_to 'Edit', '#', class: "btn btn-default btn-xs", role: "button", rel: 'edit_basin_id', id: "edit_basin_id_#{basin.id}" %></span>
+          </li>
+        <% end %>
+    </ul>
+
+    <%= link_to 'New Basin', '#', id: "edit_basin_id_new", rel: 'new_basin' %>
+  </div>
+  <div id='basin_info'>
+  </div>
+</div>

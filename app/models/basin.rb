@@ -1,14 +1,14 @@
 class Basin < ActiveRecord::Base
+  enum basin_type: [:cylindrical, :rectangular, :lagoon, :other]
   include Archivable
   include PropertyMethods
   
   belongs_to :site
-  belongs_to :customer, through: :site
-
+  scope :ordered, -> { order("archive_number DESC, site_id, name")}
 
   def modified
     user = User.find_by_id(updated_by_id)
-    user.nil? ? "unknown" : "#{user.first_name[0]}#{user.last_name}@#{created_at.to_s(:simple_time)}"
+    user.nil? ? "unknown" : "#{user.first_name[0]}#{user.last_name}@#{updated_at.to_s(:simple_time)}"
   end
 
 end

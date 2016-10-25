@@ -3,6 +3,7 @@ class CreateBasins < ActiveRecord::Migration
     create_table :basins do |t|
       t.integer :site_id
       t.string :name
+      t.integer :basin_type
       t.float :depth
       t.float :width
       t.float :length

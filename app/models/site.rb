@@ -6,6 +6,8 @@ class Site < ActiveRecord::Base
 
   has_many :basins
   belongs_to :customer
+
+  scope :ordered, -> { order("archive_number DESC, name")}
   
   def boproperties
     Property.where("holder_model = 'Site' AND archived_at is NULL").order("properties.name")

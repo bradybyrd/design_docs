@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   
   include Archivable
   
+  belongs_to :customer
   after_initialize :set_default_role, :if => :new_record?
 
   def self.current_user
@@ -25,4 +26,5 @@ class User < ActiveRecord::Base
   def short_name
     "#{first_name[0]}#{last_name}"
   end
+  
 end

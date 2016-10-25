@@ -1,0 +1,8 @@
+<tr>
+  <td><%= link_to basin.site.name, edit_basin_path(basin) %></td>
+  <td><%= basin.name %></td>
+  <td><%= basin.basin_type %></td>
+  <td><%= basin.volume %><small>m<sup>3</sup></small></td>
+  <td><%= basin.modified %></td>
+  <td><%= link_to 'Edit', edit_basin_path(basin) %>|<%=link_to 'Destroy', basin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

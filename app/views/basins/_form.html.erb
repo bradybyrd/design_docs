@@ -1,19 +1,39 @@
-<%= simple_form_for(@basin) do |f| %>
-  <%= f.error_notification %>
+<% if @embed %>
+<div id='basin_info'>
+  <div class='col-lg-6'>
+<% end %>
+  <%= simple_form_for(@basin) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :site_id %>
-    <%= f.input :name %>
-    <%= f.input :depth %>
-    <%= f.input :width %>
-    <%= f.input :length %>
-    <%= f.input :diameter %>
-    <%= f.input :volume %>
-    <%= f.input :surface_area %>
-    <%= f.input :side_slope_ratio %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :site_id, collection: current_user.customer.sites.unarchived.ordered.map{|l| [l.name, l.id] } %>
+      <%= f.input :name %>
+      <%= f.input :basin_type, collection: Basin.basin_types.keys.map {|btype| [btype.titleize,btype]} %>
+      <%= f.input :depth %>
+      <%= f.input :width %>
+      <%= f.input :length %>
+      <%= f.input :diameter %>
+      <%= f.input :volume %>
+      <%= f.input :surface_area %>
+      <%= f.input :side_slope_ratio %>
+      <%= f.hidden_field :embed, value: @embed %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+<% if @embed %>
   </div>
+  <div class='col-lg-3'>
+    <div id='basin_image'>
+      <% unless @basin.basin_type.nil? %>
+        <%= image_tag("basin_type_#{@basin.basin_type}.gif", alt: 'Basin Type', size: "175x120", class: "img-responsive") %>
+      <% end %>
+    </div>
+    <div id='basin_calculations' style="margin-top:20px;margin-left:50px;">
+      <%= link_to 'Calculate', '#', class: "btn btn-default btn-sm", role: "button", id: "calculate_basin" %>
+    </div>
+  </div>
+</div>
 <% end %>
