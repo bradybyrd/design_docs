@@ -1,6 +1,6 @@
-== README Design Docs
+## README Design Docs
 
-Provides basic UX for gathering information from customers to construct design scenarios for wastewater treatment.  Mostly to get my bootstrap/rails4 skill up.
++ Provides basic UX for gathering information from customers to construct design scenarios for wastewater treatment.  Mostly to get my bootstrap/rails4 skill up.
 
 The intent is to replace data entry and reporting in spreadsheets built by engineers and manipulated by sales
 
