@@ -20,4 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  site: Site
+  customer: Customer
+  property: Property
+  basin: Basin
+  user: User
+  dashboard:
+    index:
+      welcome_back: "Welcome Back %{first_name} from %{customer_name}"
+      create_new_model: "Create New %{model}"
+      add_model: "Add %{model}"
+      model_information: "%{model} Information"
+      design_reports: "Design Reports"
+      registered: registered
+      update: Update
+      cancel: Cancel
+    
+  

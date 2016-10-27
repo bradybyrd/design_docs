@@ -6,7 +6,7 @@ $(document).on 'change', '#basin_basin_type', ->
     cur_id = $(this).val()
     img_url = window.location.origin + "/assets/basin_type_" + cur_id + ".gif"
     new_link = "<div id='basin_image'><img src='" + img_url
-    new_link += "' alt='basin image' size='175x120' class='img-responsive'></img></div>"
+    new_link += "' alt='basin image' size='210x140' class='img-responsive'></img></div>"
     $("#basin_image").replaceWith(new_link)
     if cur_id == 'cylindrical'
         $(".basin_width").hide()
@@ -47,7 +47,7 @@ $(document).on 'click', "#calculate_basin", ->
   e_depth = parseFloat(depth)
   if basin_type == 'cylindrical'
       e_radius = (parseFloat(diameter) + e_depth * ratio) * 0.5
-      surface_area = pi() * (parseFloat(diameter) * .5)^2
+      surface_area = Math.PI * Math.pow((parseFloat(diameter) * .5), 2)
       volume = surface_area * e_depth
   else
       e_width = parseFloat(width) + e_depth * ratio

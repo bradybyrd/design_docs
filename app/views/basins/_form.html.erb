@@ -2,25 +2,61 @@
 <div id='basin_info'>
   <div class='col-lg-6'>
 <% end %>
-  <%= simple_form_for(@basin) do |f| %>
-    <%= f.error_notification %>
+  <%= form_for(@basin, html: {class: 'form-horizontal edit_basin', role: 'form'}) do |f| %>
+    <% if @basin.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@basin.errors.count, "error") %> prohibited this record from being saved:</h2>
 
-    <div class="form-inputs">
-      <%= f.input :site_id, collection: current_user.customer.sites.unarchived.ordered.map{|l| [l.name, l.id] } %>
-      <%= f.input :name %>
-      <%= f.input :basin_type, collection: Basin.basin_types.keys.map {|btype| [btype.titleize,btype]} %>
-      <%= f.input :depth %>
-      <%= f.input :width %>
-      <%= f.input :length %>
-      <%= f.input :diameter %>
-      <%= f.input :volume %>
-      <%= f.input :surface_area %>
-      <%= f.input :side_slope_ratio %>
-      <%= f.hidden_field :embed, value: @embed %>
-    </div>
-
+        <ul>
+        <% @basin.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% is_cyl = (!@basin.basin_type.nil? && @basin.basin_type == "cylindrical") %>
+    <div class="form-group" id="<">
+      <%= f.label :site_id %>
+      <%= f.select :site_id, current_user.customer.sites.unarchived.ordered.map{|l| [l.name, l.id] }, {}, class: "form-control" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :basin_type %>
+      <%= f.select :basin_type, Basin.basin_types.keys.map {|btype| [btype.titleize,btype]}, {}, class: "form-control" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :depth %>
+      <%= f.text_field :depth, class: "form-control", title: "Depth to water line in meters" %>
+    </div> 
+    <div class="form-group basin_width" style=<%= is_cyl ? "display:none;" : "" %>>
+      <%= f.label :width %>
+      <%= f.text_field :width, class: "form-control", title: "Width of rectangular basin in meters" %>
+    </div> 
+    <div class="form-group basin_length" style=<%= is_cyl ? "display:none;" : "" %>>
+      <%= f.label :length %>
+      <%= f.text_field :length, class: "form-control", title: "Length of rectangular basin in meters" %>
+    </div> 
+    <div class="form-group basin_diameter" style=<%= is_cyl ? "" : "display:none;" %>>
+      <%= f.label :diameter %>
+      <%= f.text_field :diameter, class: "form-control", title: "Diameter of circular basin in meters" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :surface_area %>
+      <%= f.text_field :surface_area, class: "form-control", title: "Calculated or input as square meters" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :side_slope_ratio %>
+      <%= f.text_field :side_slope_ratio, class: "form-control", title: "Slope as a decimal ratio" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :volume %>
+      <%= f.text_field :volume, class: "form-control", title: "Calculated or input as cubic meters" %>
+    </div> 
     <div class="form-actions">
-      <%= f.button :submit %>
+      <%= f.submit %>
     </div>
   <% end %>
 <% if @embed %>
@@ -28,11 +64,11 @@
   <div class='col-lg-3'>
     <div id='basin_image'>
       <% unless @basin.basin_type.nil? %>
-        <%= image_tag("basin_type_#{@basin.basin_type}.gif", alt: 'Basin Type', size: "175x120", class: "img-responsive") %>
+        <%= image_tag("basin_type_#{@basin.basin_type}.gif", alt: 'Basin Type', size: "210x140", class: "img-responsive") %>
       <% end %>
     </div>
     <div id='basin_calculations' style="margin-top:20px;margin-left:50px;">
-      <%= link_to 'Calculate', '#', class: "btn btn-default btn-sm", role: "button", id: "calculate_basin" %>
+      <%= link_to 'Calculate Volume', '#', class: "btn btn-default btn-sm", role: "button", id: "calculate_basin" %>
     </div>
   </div>
 </div>

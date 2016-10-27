@@ -1,0 +1,21 @@
+# Files in the config/locales directory are used for internationalization
+
+es:
+  site: Sitio
+  customer: Customer
+  property: Propiedad
+  basin: Cuenca
+  user: Usuario
+  submit: Presentar
+  dashboard:
+    index:
+      welcome_back: "Bienvenido de nuevo %{first_name} de %{customer_name}"
+      create_new_model: "Crear nueva %{model}"
+      add_model: "Añadir %{model}"
+      model_information: "%{model} Información"
+      design_reports: "Informes de diseño"
+      registered: registrado
+      update: Validar
+      cancel: Cancelar
+    
+  

@@ -1,20 +1,20 @@
 <div class='container'>
   <div class='row'>
     <div class='col-lg-8'>
-      <h3>Welcome back <%=current_user.first_name %> from <%= current_user.customer.name %></h3>
-      <p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
+      <h3><%= t('.welcome_back', first_name: current_user.first_name, customer_name: current_user.customer.name) %></h3>
+      <p><%= link_to "#{t(:user, count: 2)}:", users_path %> <%= User.count %> <%=t('.registered')%></p>
     </div>
     <div class='col-lg-4'>
       <h4>Recent Activity</h4>
       <ul class='list-group'>
-        <li class=list-group-item>Create new site: <a href='#'>Pierce Island</a><br><small>5/17/2015 08:45 am</small></li>
-        <li class=list-group-item>>Add property: <a href='#'>Mean summer temperature</a><br><small>5/23/2015 09:25 am</small></li>
+        <li class=list-group-item><%= t('.create_new_model', model: t(:site))%>: <a href='#'>Pierce Island</a><br><small>5/17/2015 08:45 am</small></li>
+        <li class=list-group-item><%= t('.add_model', model: t(:property))%>: <a href='#'>Mean summer temperature</a><br><small>5/23/2015 09:25 am</small></li>
       </ul>
     </div>
   </div>
   <div class='row'>
     <div class='col-lg-8'>
-      <h4>Sites Information</h4>
+      <h4><%= t('.model_information', model: t(:site))%></h4>
       <ul class='list-group'>
         <% current_user.customer.sites.unarchived.each do |site| %>
         <li class=list-group-item><span class='glyphicon glyphicon-globe' style="margin:10px; color:#36648b;"></span><%= link_to site.name, edit_site_path(site) %></li>
@@ -23,7 +23,7 @@
       
     </div>
     <div class='col-lg-4'>
-      <h4>Design Reports</h4>
+      <h4><%= t(:design_reports)%></h4>
       <ul class='list-group'>
         <li class=list-group-item>Basin with aerators: <a href='#'>Pierce Island-Tank1</a><br><small>5/17/2015 08:45 am</small></li>
         <li class=list-group-item>Alternate diffusers: <a href='#'>Pierce Island-Tank2</a><br><small>5/23/2015 09:25 am</small></li>
