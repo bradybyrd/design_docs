@@ -15,48 +15,18 @@
       </div>
     <% end %>
     <% is_cyl = (!@basin.basin_type.nil? && @basin.basin_type == "cylindrical") %>
-    <div class="form-group" id="<">
-      <%= f.label :site_id %>
-      <%= f.select :site_id, current_user.customer.sites.unarchived.ordered.map{|l| [l.name, l.id] }, {}, class: "form-control" %>
-    </div> 
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control" %>
-    </div> 
-    <div class="form-group">
-      <%= f.label :basin_type %>
-      <%= f.select :basin_type, Basin.basin_types.keys.map {|btype| [btype.titleize,btype]}, {}, class: "form-control" %>
-    </div> 
-    <div class="form-group">
-      <%= f.label :depth %>
-      <%= f.text_field :depth, class: "form-control", title: "Depth to water line in meters" %>
-    </div> 
-    <div class="form-group basin_width" style=<%= is_cyl ? "display:none;" : "" %>>
-      <%= f.label :width %>
-      <%= f.text_field :width, class: "form-control", title: "Width of rectangular basin in meters" %>
-    </div> 
-    <div class="form-group basin_length" style=<%= is_cyl ? "display:none;" : "" %>>
-      <%= f.label :length %>
-      <%= f.text_field :length, class: "form-control", title: "Length of rectangular basin in meters" %>
-    </div> 
-    <div class="form-group basin_diameter" style=<%= is_cyl ? "" : "display:none;" %>>
-      <%= f.label :diameter %>
-      <%= f.text_field :diameter, class: "form-control", title: "Diameter of circular basin in meters" %>
-    </div> 
-    <div class="form-group">
-      <%= f.label :surface_area %>
-      <%= f.text_field :surface_area, class: "form-control", title: "Calculated or input as square meters" %>
-    </div> 
-    <div class="form-group">
-      <%= f.label :side_slope_ratio %>
-      <%= f.text_field :side_slope_ratio, class: "form-control", title: "Slope as a decimal ratio" %>
-    </div> 
-    <div class="form-group">
-      <%= f.label :volume %>
-      <%= f.text_field :volume, class: "form-control", title: "Calculated or input as cubic meters" %>
-    </div> 
-    <div class="form-actions">
-      <%= f.submit %>
+    <%= bootstrap_form_field(f, :site_id, collection: current_user.customer.sites.unarchived.ordered).html_safe  %>
+    <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
+    <%= bootstrap_form_field(f, :basin_type, collection_mapped: Basin.basin_types.keys.map {|btype| [btype.titleize,btype]}).html_safe  %>
+    <%= bootstrap_form_field(f, :depth, placeholder: "Depth to water line in meters", help_text: "meters").html_safe  %>
+    <%= bootstrap_form_field(f, :width, placeholder: "Width of basin in meters", help_text: "meters", hidden: is_cyl).html_safe  %>
+    <%= bootstrap_form_field(f, :length, placeholder: "Length of basin in meters", help_text: "meters", hidden: is_cyl).html_safe  %>
+    <%= bootstrap_form_field(f, :diameter, placeholder: "Diameter of basin in meters", help_text: "meters", hidden: !is_cyl).html_safe  %>
+    <%= bootstrap_form_field(f, :surface_area, placeholder: "Calculated or input as square meters", help_text: "m<sup>2</sup>").html_safe  %>
+    <%= bootstrap_form_field(f, :side_slope_ratio, placeholder: "Slope as a decimal ratio", help_text: "(rise/run)").html_safe  %>
+    <%= bootstrap_form_field(f, :volume, volume: "Calculated or input as cubic meters", help_text: "m<sup>3</sup>").html_safe  %>
+    <div class="form-actions" style="float:right;">
+      <%= f.submit(nil, class: "btn-info") %>
     </div>
   <% end %>
 <% if @embed %>

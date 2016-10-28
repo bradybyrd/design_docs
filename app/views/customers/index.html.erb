@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
   <div class="row">
-    <h3>Customers</h3>
+    <h4>Customers</h4>
     <div class="column">
       <table class="table">
         <thead>
           <tr>
             <th>Name</th>
             <th>Description</th>
-            <th colspan="3"></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -16,9 +16,7 @@
             <tr>
                 <td><%= customer.name %></td>
                 <td><%= customer.description %></td>
-                <td><%= link_to 'Show', customer %></td>
-                <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-                <td><%= link_to 'Delete', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to 'Edit', edit_customer_path(customer) %>|<%= link_to 'Delete', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tbody>
