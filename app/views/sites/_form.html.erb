@@ -1,28 +1,32 @@
-<%= form_for(@site, html: {class: 'form-horizontal edit_basin', role: 'form'}) do |f| %>
-  <% if @site.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@site.errors.count, "error") %> prohibited this record from being saved:</h2>
+<div class='col-lg-6'>
+  <%= form_for(@site, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+    <% if @site.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@site.errors.count, "error") %> prohibited this record from being saved:</h2>
 
-      <ul>
-      <% @site.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @site.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
+    <%= bootstrap_form_field(f, :customer_id, collection: Customer.unarchived).html_safe  %>
+    <%= bootstrap_form_field(f, :address1).html_safe  %>
+    <%= bootstrap_form_field(f, :address2).html_safe  %>
+    <%= bootstrap_form_field(f, :city).html_safe  %>
+    <%= bootstrap_form_field(f, :state, collection_mapped: Site::STATES).html_safe  %>
+    <%= bootstrap_form_field(f, :zip, placeholder: "Zip/Postal code").html_safe  %>
+    <%= bootstrap_form_field(f, :phone, placeholder: "Phone number ###-###-####").html_safe  %>
+    <%= bootstrap_form_field(f, :gps, placeholder: "GPS location coordinates").html_safe  %>
+    <div class="form-actions" style="float:right;">
+      <%= f.submit(nil, class: "btn-info") %>
     </div>
   <% end %>
-  <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
-  <%= bootstrap_form_field(f, :customer_id, collection: Customer.unarchived).html_safe  %>
-  <%= bootstrap_form_field(f, :address1).html_safe  %>
-  <%= bootstrap_form_field(f, :address2).html_safe  %>
-  <%= bootstrap_form_field(f, :city).html_safe  %>
-  <%= bootstrap_form_field(f, :state, collection_mapped: Site::STATES).html_safe  %>
-  <%= bootstrap_form_field(f, :zip, placeholder: "Zip/Postal code").html_safe  %>
-  <%= bootstrap_form_field(f, :phone, placeholder: "Phone number ###-###-####").html_safe  %>
-  <%= bootstrap_form_field(f, :gps, placeholder: "GPS location coordinates").html_safe  %>
-  <div class="form-actions" style="float:right;">
-    <%= f.submit(nil, class: "btn-info") %>
-  </div>
-<% end %>
 
 
-<br><br><p class='text-right'><small>Site id: <%= "#{@site.id} - #{@site.modified}" %></small></p>
+  <br><br><p class='text-right'><small>Site id: <%= "#{@site.id} - #{@site.modified}" %></small></p>
+<div class='col-lg-3'>
+  <p> Basis details of the site
+</div>

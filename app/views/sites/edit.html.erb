@@ -5,9 +5,9 @@
 
 <div class="container">
   <% if @current_tab == "site_details" %>
-	  <div style="width: 700px;">
-	    <%= render 'form'  %>
-	  </div>
+	  <!-- <div style="width: 700px;"> -->
+	    <%= render 'site_panels'  %>
+
   <% elsif @current_tab == "properties" %>
     <%= render 'properties/edit_properties' %>
   <% elsif @current_tab == "basins" %>

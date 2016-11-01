@@ -1,4 +1,10 @@
 # DesignDocs - Treatment App
+10-31-16 Questions:
+  Generate a project number
+  Product catalog
+  
+
+
 
 * Devise Setup *
 Some setup you must do manually if you haven't yet:

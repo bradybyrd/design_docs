@@ -1,5 +1,4 @@
-<% @basin = basin unless basin.nil? %>
-<div id='basin_info'>
+<div id='basin_design_info'>
   <div class='col-lg-6'>
     <%= form_for(@basin, html: {class: 'form-horizontal edit_basin', role: 'form'}) do |f| %>
       <% if @basin.errors.any? %>
