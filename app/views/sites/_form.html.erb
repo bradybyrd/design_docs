@@ -20,6 +20,11 @@
     <%= bootstrap_form_field(f, :zip, placeholder: "Zip/Postal code").html_safe  %>
     <%= bootstrap_form_field(f, :phone, placeholder: "Phone number ###-###-####").html_safe  %>
     <%= bootstrap_form_field(f, :gps, placeholder: "GPS location coordinates").html_safe  %>
+    <% if @site.new_record? %>
+      <%= bootstrap_form_field(f, 'initial_zone', seed_value: "Zone1", placeholder: "name for zone, stage or design scenario").html_safe  %>
+    <% else %>
+       <%= render 'zones/list' %>
+    <% end %>
     <div class="form-actions" style="float:right;">
       <%= f.submit(nil, class: "btn-info") %>
     </div>
@@ -27,6 +32,7 @@
 
 
   <br><br><p class='text-right'><small>Site id: <%= "#{@site.id} - #{@site.modified}" %></small></p>
+</div>
 <div class='col-lg-3'>
-  <p> Basis details of the site
+  <p> Basic details of the site
 </div>

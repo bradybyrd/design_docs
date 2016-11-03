@@ -32,6 +32,9 @@ class SitesController < ApplicationController
     respond_to do |format|
       if @site.save
         set_updater
+        if params[:site]["initial_zone"]
+          @site.zones.create(name: params[:site]["initial_zone"], updated_by_id: current_user.id)
+        end
         format.html { redirect_to @site, notice: 'Site was successfully created.' }
         format.json { render :show, status: :created, location: @site }
       else

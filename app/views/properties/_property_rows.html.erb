@@ -1,44 +1,63 @@
 <fieldset>
   <div class='form-group'>
-    <%= f.label "Property", class: 'col-sm-3 control-label' %>
-    <div class='col-sm-4'>
-      <%= f.label "Value", class: 'col-sm-3 control-label' %>
       <%= f.hidden_field :name %>
       <%= hidden_field_tag "associated_model", "#{@record.class.to_s.underscore}__#{@record.id}" %>
       <%= hidden_field_tag "add_property_target_url", properties_add_new_property_path %>
-    </div>
-      <%= f.label "modified", class: 'col-sm-2 control-label small' %>
-  </div>
-  <% inc = 0 %>
-  <% @record.properties.unarchived.ordered.each do |prop| %>
-    <% if prop.property_values.empty? %>
-      <div class='form-group'>
-        <%= f.label prop.name, class: 'col-sm-3 control-label' %>
-        <%= hidden_field_tag "props[property_id_#{inc}]", prop.id.to_s %>
-        <%= hidden_field_tag "props[property_value_id_#{inc}]", 'new_id' %>
-        <div class='col-sm-4'>
-          <%= text_field_tag "props[data_#{inc}]", '' %>
-        </div>
-        <p class="help-block small" style='display: inline;'>n/a</p>
-      </div>
-    <% else %>
-      <% prop.property_values.for(@record.id).ordered.each_with_index do |pv, idx| %>
-        <% inc += idx %>
-        <div class='form-group'>
-          <%= f.label prop.name, class: 'col-sm-3 control-label' %>
-          <%= hidden_field_tag "props[property_id_#{inc}]", prop.id.to_s %>
-          <%= hidden_field_tag "props[property_value_id_#{inc}]", pv.id.to_s %>
-          <div class='col-sm-4'>
-            <%= text_field_tag "props[data_#{inc}]", pv.data %>
-          </div>
-            <p class="help-block small" style='display: inline; color: #333;'><%= pv.creator %></p>
-        </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class='col-md-3'>Property</th>
+          <th>Category</th>
+          <th class='col-md-1'>Pos</th>
+          <th class='col-md-3'>Data</th>
+          <th>Actions</th>
+          <th><small>Modified</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% inc = 0 %>
+        <% @record.properties.unarchived.ordered.each do |prop| %>
+        <% if prop.property_values.empty? %>
+          <tr>
+            <td>
+              <%= f.label prop.name, class: 'control-label' %>
+              <%= hidden_field_tag "props[property_id_#{inc}]", prop.id.to_s %>
+              <%= hidden_field_tag "props[property_value_id_#{inc}]", 'new_id' %>
+            </td>
+            <td><%= text_field_tag "props[category_#{inc}]", prop.category %></td>
+            <td><%= text_field_tag "props[position_#{inc}]", prop.position %></td>
+            <td><%= text_field_tag "props[data_#{inc}]", '' %></td>
+            <td><%=link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td></td>
+          </tr>
+        <% else %>
+          <% prop.property_values.for(@record.id).ordered.each_with_index do |pv, idx| %>
+            <% inc += idx %>
+            <tr>
+              <td>
+                <%= f.label prop.name, class: 'control-label' %>
+                <%= hidden_field_tag "props[property_id_#{inc}]", prop.id.to_s %>
+                <%= hidden_field_tag "props[property_value_id_#{inc}]", pv.id.to_s %>
+              </td>
+              <td><%= text_field_tag "props[category_#{inc}]", prop.category %></td>
+              <td><%= text_field_tag "props[position_#{inc}]", prop.position, placeholder: "sort position" %></td>
+              <td><%= text_field_tag "props[data_#{inc}]", pv.data %></td>
+              <td></td>
+              <td><span class="help-block small" style='display: inline; color: #333;'><%= pv.creator%></span></td>
+            </tr>
+            <td>
+              <td colspan='6'>
+                <%= link_to 'Add Property', '#', id: "add_property_table" %>
+                <%= hidden_field_tag "form_increment", inc + 1 %>
+              </td>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
-    <% inc += 1 %>
-  <% end %>
+      </tbody>
+    </table>
+  </div>
 </fieldset>
-<div id='add_new_property'>
-  <%= hidden_field_tag "form_increment", inc + 1 %>
-</div>
-<%= link_to 'Add Property', '#', id: "add_property" %>
+
+    
+    
+    

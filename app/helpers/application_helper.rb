@@ -32,12 +32,11 @@ module ApplicationHelper
   #</div>
   def bootstrap_form_field(form_ref, field, options = {})
     field_class_name = "#{form_ref.object.class.name.underscore.downcase}_#{field}"
-    label_class = "col-sm-4 control-label"
-    label_class ||= options.fetch(:label_class, nil)
-    control_class = "col-sm-8"
-    control_class ||= options.fetch(:control_class, nil)
+    label_class = options.fetch(:label_class, "col-sm-4 control-label")
+    control_class = options.fetch(:control_class, "col-sm-8")
     is_hidden = options.fetch(:hidden, false)
     help_text = options.fetch(:help_text, nil)
+    seed_value = options.fetch(:seed_value, "")
     collection = options.fetch(:collection, nil)
     text_rows = options.fetch(:text_rows, nil)
     collection_mapped = options.fetch(:collection_mapped, nil)
@@ -52,7 +51,8 @@ module ApplicationHelper
     elsif !text_rows.nil? 
       result += form_ref.text_area(field, class: "form-control", id: "#{form_ref.object.class.name.underscore.downcase}_#{field}", placeholder: placeholder)
     else
-      result += form_ref.text_field(field, class: "form-control", id: "#{form_ref.object.class.name.underscore.downcase}_#{field}", placeholder: placeholder)
+      result += form_ref.text_field(field, class: "form-control", id: "#{form_ref.object.class.name.underscore.downcase}_#{field}", placeholder: placeholder) unless field.is_a?(String)
+      result += text_field_tag(field, seed_value, class: "form-control", id: "#{form_ref.object.class.name.underscore.downcase}_#{field}", placeholder: placeholder) if field.is_a?(String)
     end
     result += "\n<span class=\"help-block small\" style=\"display:inline;\">#{help_text}</span>\n" unless help_text.nil?
     result += "\n</div>\n</div>\n"

@@ -5,6 +5,7 @@ class CreateProperties < ActiveRecord::Migration
       t.text :description
       t.string :holder_model
       t.string :category
+      t.integer :position
       t.integer :holder_id
       t.integer :created_by_id
       t.datetime :created_at

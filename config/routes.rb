@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :zones
   # Basins
   get 'basins/:id/edit_form' => 'basins#edit_form'
   resources :basins

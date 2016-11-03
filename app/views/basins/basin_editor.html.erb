@@ -1,0 +1,72 @@
+<div id='basin_info'>
+  <div class='col-lg-6'>
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#basin_info_panel">
+              Basin Geometry (show/hide)
+            </a> 
+          </h4>
+        </div>
+        <div id="basin_info_panel" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <%= render 'form' %>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#basin_design_panel">
+              Basin Design (show/hide)
+            </a> 
+          </h4>
+        </div>
+        <div id="basin_design_panel" class="panel-collapse collapse in">
+          <div class="panel-body">
+            The Properties for design go here
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#influent_panel">
+              Site Influent (show/hide)
+            </a> 
+          </h4>
+        </div>
+        <div id="influent_panel" class="panel-collapse collapse in">
+          <div class="panel-body">
+            Influent properties here
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#climate_panel">
+              Site Climate and Conditions (show/hide)
+            </a> 
+          </h4>
+        </div>
+        <div id="climate_panel" class="panel-collapse collapse in">
+          <div class="panel-body">
+            Climate and conditions properties here
+          </div>
+        </div>
+      </div>
+    </div> <!-- Accordion -->
+  </div> <!-- Grid Col -->
+</div> <!-- Basin Info -->
+<div class='col-lg-3'>
+  <div id='basin_image'>
+    <% unless @basin.basin_type.nil? %>
+      <%= image_tag("basin_type_#{@basin.basin_type}.gif", alt: 'Basin Type', size: "210x140", class: "img-responsive") %>
+    <% end %>
+  </div>
+  <div id='basin_calculations' style="margin-top:20px;margin-left:50px;">
+    <%= link_to 'Calculate Volume', '#', class: "btn btn-default btn-sm", role: "button", id: "calculate_basin" %>
+  </div>
+</div>

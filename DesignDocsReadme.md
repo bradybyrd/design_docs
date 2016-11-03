@@ -3,7 +3,9 @@
   Generate a project number
   Product catalog
   
-
+11-2-16 Alex - calculation engine
+  Working with SciLab/MatLab on HeadLoss calc - shell function from excel
+  HeatLoss could also  be put into this model
 
 
 * Devise Setup *

@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.inset_table {
+  width: 30%;
+  margin-left: 200px;
+}

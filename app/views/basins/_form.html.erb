@@ -1,4 +1,4 @@
-<% @basin = basin unless basin.nil? %>
+<% @basin = basin if defined?(basin) %>
 <div id='basin_info'>
   <div class='col-lg-6'>
     <%= form_for(@basin, html: {class: 'form-horizontal edit_basin', role: 'form'}) do |f| %>
@@ -14,7 +14,7 @@
         </div>
       <% end %>
       <% is_cyl = (!@basin.basin_type.nil? && @basin.basin_type == "cylindrical") %>
-      <%= bootstrap_form_field(f, :site_id, collection: current_user.customer.sites.unarchived.ordered).html_safe  %>
+      <%= bootstrap_form_field(f, :zone_id, collection: @site.zones.unarchived.ordered).html_safe  %>
       <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
       <%= bootstrap_form_field(f, :basin_type, collection_mapped: Basin.basin_types.keys.map {|btype| [btype.titleize,btype]}).html_safe  %>
       <%= bootstrap_form_field(f, :depth, placeholder: "Depth to water line in meters", help_text: "meters").html_safe  %>

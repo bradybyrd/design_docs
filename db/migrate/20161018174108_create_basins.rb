@@ -1,7 +1,7 @@
 class CreateBasins < ActiveRecord::Migration
   def change
     create_table :basins do |t|
-      t.integer :site_id
+      t.integer :zone_id
       t.string :name
       t.integer :basin_type
       t.float :depth
