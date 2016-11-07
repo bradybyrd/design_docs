@@ -84,9 +84,8 @@ class PropertiesController < ApplicationController
     props = params["props"]
     (1..50).each do |inc|
       if props.has_key?("new_name_#{inc}") && props["new_name_#{inc}"].length > 1
-        prop = Property.find_or_create_by(name: props["new_name_#{inc}"])
+        prop = Property.find_or_create_by(name: props["new_name_#{inc}"], holder_model: props["select_holder_model_#{inc}"])
         attrs = {
-          holder_model: props["select_holder_model_#{inc}"],
           category: props["new_category_#{inc}"],
           position: props["new_position_#{inc}"],
           tip: props["new_tip_#{inc}"],

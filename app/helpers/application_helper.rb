@@ -57,4 +57,29 @@ module ApplicationHelper
     result += "\n<span class=\"help-block small\" style=\"display:inline;\">#{help_text}</span>\n" unless help_text.nil?
     result += "\n</div>\n</div>\n"
   end
+
+  def bootstrap_property_field(form_ref, property, model_holder, options = {})
+    base_name = "#{form_ref.object.class.name.underscore.downcase}[property_#{property.id}[]]"
+    label_class = options.fetch(:label_class, "col-sm-4 control-label")
+    control_class = options.fetch(:control_class, "col-sm-8")
+    help_text = property.tip
+    collection_mapped = property.choices.empty? ? nil : property.choices
+    placeholder = property.description.present? && property.description.include?("||") ? property.description.split("||")[0] : property.name
+    result = "<div class=\"form-group #{base_name.gsub("[]]","]")}\" id=\"form-group\">\n"
+    result += label_tag "prop_#{property.id}", property.name, class: label_class
+    result += "\n<div class=\"#{control_class}\">\n"
+    result += hidden_field_tag(field_name(base_name, "value_holder_id"), property.value_holder_id.nil? ? "new" : property.value_holder_id) + "\n"
+    result += hidden_field_tag(field_name(base_name, "value_id"), property.value_id.nil? ? "new" : property.value_id) + "\n"
+    if !collection_mapped.nil?
+      result += select_tag(field_name(base_name, "data"), collection_mapped, {}, {class: "form-control", id: field_name(base_name, "data")})
+    else
+      result += text_field_tag(field_name(base_name, "data"), property.value_data, class: "form-control", id: field_name(base_name, "data"), placeholder: placeholder)
+    end
+    result += "\n<span class=\"help-block small\" style=\"display:inline;\">#{help_text}</span>\n" unless help_text.nil?
+    result += "\n</div>\n</div>\n"
+  end
+  
+  def field_name(prefix, suffix = "")
+    prefix.gsub("]]","#{suffix}]]")
+  end  
 end

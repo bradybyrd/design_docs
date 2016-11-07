@@ -44,6 +44,18 @@ module PropertyMethods
     end
   end
   
+  def properties_for_input(categories = [])
+    result = properties.ordered
+    result = result.where("category IN (?)", categories.join(",")).ordered if categories.size > 0
+    result.each do |prop|
+      prop.value_holder_id = self.id
+      values = prop.property_values.for(self.id)
+      prop.value_id = values.empty? ? nil : values.first.id
+      prop.value_data = values.empty? ? nil : values.first.data
+    end
+    result
+  end
+  
   def add_property(prop_hash)
     return nil if prop_hash["new_name"].length < 2
     prop = Property.create({name: prop_hash["new_name"], holder_model: self.class.to_s, created_by_id: User.current_user.id})

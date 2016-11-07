@@ -17,6 +17,7 @@
     <%= bootstrap_form_field(f, :category).html_safe  %>
     <%= bootstrap_form_field(f, :position).html_safe  %>
     <%= bootstrap_form_field(f, :tip).html_safe  %>
+    <%= bootstrap_form_field(f, :description, text_rows: 3, placeholder: "format: helpful text||long description").html_safe  %>
     
     <div class="form-actions" style="float:right;">
       <%= f.submit(nil, class: "btn-info") %>

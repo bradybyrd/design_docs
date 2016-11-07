@@ -26,11 +26,26 @@
     </div>
     <div id="climate_panel" class="panel-collapse collapse">
       <div class="panel-body">
-        Climate and conditions properties here
+        <%= render :partial => 'properties/property_form', locals: {record: @site, conditions: ["Climate"] } %>
       </div>
     </div>
   </div>
   <% @site.zones.unarchived.ordered.each do |zone| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <span class='glyphicon glyphicon-tint' style="margin:10px; color:#36648b;"></span>
+          <a data-toggle="collapse" data-parent="#accordion" href="#influent_panel_<%= zone.id %>">
+            Zone Influent (zone: <%= zone.name %>) <small style="float:right;">(show/hide)</small>
+          </a> 
+        </h4>
+      </div>
+      <div id="influent_panel_<%= zone.id %>" class="panel-collapse collapse">
+        <div class="panel-body">
+          <%= render :partial => 'properties/property_form', locals: {record: zone, conditions: ["Influent"] } %>
+        </div>
+      </div>
+    </div>
     <% zone.basins.unarchived.ordered.each_with_index do |basin, idx| %>
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -63,20 +78,5 @@
         </div>
       </div>
     <% end %>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <span class='glyphicon glyphicon-tint' style="margin:10px; color:#36648b;"></span>
-          <a data-toggle="collapse" data-parent="#accordion" href="#influent_panel">
-            Site Influent (zone: <%= zone.name %>) <small style="float:right;">(show/hide)</small>
-          </a> 
-        </h4>
-      </div>
-      <div id="influent_panel" class="panel-collapse collapse">
-        <div class="panel-body">
-          Influent properties here
-        </div>
-      </div>
-    </div>
   <% end %>
 </div> <!-- Accordion -->

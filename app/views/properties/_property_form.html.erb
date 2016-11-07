@@ -1,0 +1,32 @@
+<div id="<%= "#{record.class.name.underscore.downcase}_info_#{record.id}" %>">
+  <div class='col-lg-9'>
+    <%= form_for(record, html: {class: 'form-horizontal edit_basin', role: 'form'}) do |f| %>
+      <% if record.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(record.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+          <ul>
+          <% record.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class='form-group'>
+        <% record.properties_for_input(conditions).each do |prop| %>
+          <%= bootstrap_property_field(f, prop, record, label_class: "col-sm-6 control-label", control_class: "col-sm-6").html_safe  %>
+        <% end %>
+        <div class="form-actions" style="float:right;">
+          <%= f.submit(nil, class: "btn-info") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class='col-lg-3'>
+    <div id="side_bar_<%= record.id %>">
+      Property entry information
+    </div>
+  </div>
+</div> <!-- record Info -->
+
+    

@@ -7,6 +7,7 @@ class CreateProperties < ActiveRecord::Migration
       t.string :category
       t.integer :position
       t.string :tip
+      t.text :choices
       t.integer :holder_id
       t.integer :updated_by_id
       t.datetime :created_at
