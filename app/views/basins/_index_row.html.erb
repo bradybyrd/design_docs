@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to basin.site.name, edit_basin_path(basin) %></td>
+  <td><%= link_to "#{basin.zone.site.name}:#{basin.zone.name}", edit_basin_path(basin) %></td>
   <td><%= basin.name %></td>
   <td><%= basin.basin_type %></td>
   <td><%= basin.volume %><small>m<sup>3</sup></small></td>

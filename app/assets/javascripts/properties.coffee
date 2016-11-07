@@ -23,5 +23,17 @@ $(document).on 'click', 'form #add_property', (event) ->
            data: {'form_increment' : form_increment, 'add_property' : 'add', 'associated_model' : associated_model}
            success: (data) ->
              $('#add_new_property').replaceWith(data);
+
+$(document).on 'click', 'form #add_property_table', (event) ->
+  event.preventDefault();
+  form_increment = $('#form_increment').val()
+  target_url = $('#add_property_target_url').val()
+  associated_model = $('#associated_model').val()
+  add_action = $('#add_action').val()
+  $.ajax window.location.origin + target_url,
+           type: 'GET',
+           data: {'form_increment' : form_increment, 'add_action' : add_action, 'associated_model' : associated_model}
+           success: (data) ->
+             $('#form_increment').parent().parent().replaceWith(data);
              
 

@@ -1,0 +1,28 @@
+<tr>
+  <td>
+    <% if @add_action != "index" %>
+      <%= select_tag "props[select_property_id_#{@form_increment}]", options_from_collection_for_select(@property_list, "id", "name") + "\n<option value='-1'>Add new...</option>".html_safe %>
+    <% end %>
+    <%= text_field_tag "props[new_name_#{@form_increment}]", nil, placeholder: "new property", style: "#{@add_action == "index" ? '' : 'display: none;'}" %>
+  </td>
+  <td><%= text_field_tag "props[new_category_#{@form_increment}]", '', placeholder: "category" %></td>
+  <td><%= text_field_tag "props[new_tip_#{@form_increment}]", '', placeholder:  "user tip e.g meters" %></td>
+  <td><%= text_field_tag "props[new_position_#{@form_increment}]", '0', placeholder:  "sort pos" %></td>
+  <% if @add_action == "index" %>
+    <td><%= select_tag "props[select_holder_model_#{@form_increment}]", options_for_select(Property::HOLDER_MODELS) %></td>
+  <% else %>
+    <td><%= text_field_tag "props[new_data_#{@form_increment}]", nil, placeholder: "new value" %></td>
+  <% end %>
+  <td>
+  </td>
+  <td>(new)</td>
+</tr>
+<tr>
+  <td colspan='7'>
+    <%= link_to "add rows", '#', id: "add_property_table" %>
+    <%= hidden_field_tag "form_increment", @form_increment %>
+    <% if @add_action == "index" %>
+    <span style="float:right;"><%= submit_tag("Save", class: "btn-info") %></span>
+    <% end %>
+  </td>
+</tr>

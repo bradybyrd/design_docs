@@ -61,6 +61,13 @@ class ZonesController < ApplicationController
     end
   end
 
+  # GET /zones/add_zone
+  def add_zone
+    @form_increment = params["form_increment"]
+    @zone = Zone.new(site_id: params["site_id"])
+    render 'add_zone', layout: false
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_zone

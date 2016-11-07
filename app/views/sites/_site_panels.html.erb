@@ -30,52 +30,53 @@
       </div>
     </div>
   </div>
-  <% @site.basins.unarchived.ordered.each_with_index do |basin, idx| %>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <span class='glyphicon glyphicon-list-alt' style="margin:10px; color:#36648b;"></span>
-          <a data-toggle="collapse" data-parent="#accordion" href="#basin_info_panel<%=idx %>">
-            <%= basin.name %> - Basin Geometry <small style="float:right;">(show/hide)</small>
-          </a> 
-        </h4>
-      </div>
-      <div id="basin_info_panel<%=idx %>" class="panel-collapse collapse">
-        <div class="panel-body">
-          <%= render :partial => 'basins/form', locals: {basin: basin} %>
+  <% @site.zones.unarchived.ordered.each do |zone| %>
+    <% zone.basins.unarchived.ordered.each_with_index do |basin, idx| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <span class='glyphicon glyphicon-list-alt' style="margin:10px; color:#36648b;"></span>
+            <a data-toggle="collapse" data-parent="#accordion_<%=basin.zone_id %>" href="#basin_info_panel<%=idx %>">
+              <%= basin.name %> - Basin Geometry (zone: <%= zone.name %>) <small style="float:right;">(show/hide)</small>
+            </a> 
+          </h4>
+        </div>
+        <div id="basin_info_panel<%=idx %>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <%= render :partial => 'basins/form', locals: {basin: basin} %>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <span class='glyphicon glyphicon-screenshot' style="margin:10px; color:#36648b;"></span>
+            <a data-toggle="collapse" data-parent="#accordion_<%=basin.zone_id %>" href="#basin_design_panel<%=idx %>">
+              <%= basin.name %> - Basin Design (zone: <%= basin.zone.name %>) <small style="float:right;">(show/hide)</small>
+            </a> 
+          </h4>
+        </div>
+        <div id="basin_design_panel<%=idx %>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <%= render :partial => 'basins/design_form', locals: {basin: basin} %>
+          </div>
+        </div>
+      </div>
+    <% end %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <span class='glyphicon glyphicon-screenshot' style="margin:10px; color:#36648b;"></span>
-          <a data-toggle="collapse" data-parent="#accordion" href="#basin_design_panel<%=idx %>">
-            <%= basin.name %> - Basin Design <small style="float:right;">(show/hide)</small>
+          <span class='glyphicon glyphicon-tint' style="margin:10px; color:#36648b;"></span>
+          <a data-toggle="collapse" data-parent="#accordion" href="#influent_panel">
+            Site Influent (zone: <%= zone.name %>) <small style="float:right;">(show/hide)</small>
           </a> 
         </h4>
       </div>
-      <div id="basin_design_panel<%=idx %>" class="panel-collapse collapse">
+      <div id="influent_panel" class="panel-collapse collapse">
         <div class="panel-body">
-          <%= render :partial => 'basins/design_form', locals: {basin: basin} %>
+          Influent properties here
         </div>
       </div>
     </div>
   <% end %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <span class='glyphicon glyphicon-tint' style="margin:10px; color:#36648b;"></span>
-        <a data-toggle="collapse" data-parent="#accordion" href="#influent_panel">
-          Site Influent <small style="float:right;">(show/hide)</small>
-        </a> 
-      </h4>
-    </div>
-    <div id="influent_panel" class="panel-collapse collapse">
-      <div class="panel-body">
-        Influent properties here
-      </div>
-    </div>
-  </div>
-
 </div> <!-- Accordion -->

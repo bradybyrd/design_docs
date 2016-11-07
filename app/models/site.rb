@@ -3,6 +3,7 @@ class Site < ActiveRecord::Base
   include PropertyMethods
   audited
   acts_as_commentable :public, :private
+  before_save :set_modified
   
   STATES = %w(AK AL AR AZ CA CO CT DC DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY)
 
@@ -10,11 +11,6 @@ class Site < ActiveRecord::Base
   belongs_to :customer
 
   scope :ordered, -> { order("archive_number DESC, name")}
-
-  def modified
-    user = User.find_by_id(updated_by_id)
-    user.nil? ? "unknown" : "#{user.first_name[0]}#{user.last_name}@#{updated_at.to_s(:simple_time)}"
-  end
   
   def basins(zone_id = nil)
     if zone_id.nil? && self.zones.empty?

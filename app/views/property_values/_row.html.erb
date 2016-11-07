@@ -1,21 +1,23 @@
-<div class="column" style="width: 100%;">
   <table class="table table-hover">
     <thead>
       <tr>
         <th>Holder</th>
         <th>Data</th>
-        <th>Modified</th>
       </tr>
     </thead>
     <tbody>
       <% @property.property_values.ordered.each do |property_value| %>
         <tr class='<%= property_value.archived? ? 'inactive' : '' %>'>
-          <td><%= h(property_value.holder_name) %></td>
+          <td class="text-nowrap">
+            <%= h(property_value.holder_name) %><br>
+            <span class='last_modified'><%= property_value.creator%></span>
+          </td>
           <td><%= h(property_value.data) %></td>
-          <td><%= h(property_value.creator) %></td>
         </tr>
       <% end %>
+      <tr>
+        <td colspan='3'><%= link_to "<small>Add Value</small>".html_safe, '#', id: 'add_property_value' %></td>
+      </tr>
     </tbody>
   </table>
-  <br><%= link_to "Add Value", '#' %>
-</div>
+

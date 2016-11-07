@@ -6,8 +6,9 @@ class CreateProperties < ActiveRecord::Migration
       t.string :holder_model
       t.string :category
       t.integer :position
+      t.string :tip
       t.integer :holder_id
-      t.integer :created_by_id
+      t.integer :updated_by_id
       t.datetime :created_at
 
       t.timestamps null: false

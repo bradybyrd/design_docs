@@ -53,6 +53,7 @@ class SitesController < ApplicationController
       end
       if @site.update(site_params)
         set_updater
+        add_or_update_zones(params["zone"])
         format.html { redirect_to sites_url, notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
       else
@@ -69,6 +70,19 @@ class SitesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to sites_url, notice: 'Site was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+  
+  def add_or_update_zones(zone_params)
+    zone_params.each do |key,val|
+      if key.include?("new_name")
+        zone = @site.zones.create(name: val)
+      else
+        zone = @site.zones.find_by_id(key.gsub("name_",""))
+        zone.name = val if val.present?
+      end
+      zone.updated_by_id = current_user.id
+      zone.save!
     end
   end
     

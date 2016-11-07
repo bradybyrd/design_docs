@@ -1,0 +1,10 @@
+<tr>
+  <td><%= text_field_tag "zone[new_name_#{@form_increment}]", '' %></td>
+  <td></td>
+</tr>
+<tr>
+  <td colspan='2'>
+    <small><%= link_to 'Add Zone', '#', id: "add_zone_table" %></small>
+    <%= hidden_field_tag "form_increment", @form_increment.to_i + 1 %>
+  </td>
+</tr>

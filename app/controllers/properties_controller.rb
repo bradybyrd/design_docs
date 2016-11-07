@@ -6,7 +6,9 @@ class PropertiesController < ApplicationController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property.unarchived
+    @form_increment = 1
+    @add_action = 'index'
+    @properties = Property.unarchived.ordered
   end
 
   # GET /properties/1
@@ -44,7 +46,7 @@ class PropertiesController < ApplicationController
   def update
     respond_to do |format|
       if @property.update(property_params)
-        format.html { redirect_to @property, notice: 'Property was successfully updated.' }
+        format.html { redirect_to properties_path, notice: 'Property was successfully updated.' }
         format.json { render :show, status: :ok, location: @property }
       else
         format.html { render :edit }
@@ -67,16 +69,36 @@ class PropertiesController < ApplicationController
   def add_new_property
     inc = params["form_increment"] || 0
     @form_increment = inc.to_i + 1
-    val = params["associated_model"]
-    associated_model = val.split("__")[0].camelize
-    associated_model_id = val.split("__")[1]
-    @property_list = Property.for_model(associated_model).unarchived.ordered
-    render layout: false
+    @add_action = params["add_action"]
+    if @add_action != "index"
+      val = params["associated_model"]
+      associated_model = val.split("__")[0].camelize
+      associated_model_id = val.split("__")[1]
+      @property_list = Property.for_model(associated_model).unarchived.ordered unless associated_model
+    end
+    render('_add_new_property_table', layout: false)
   end
 
   # POST
   def create_new_properties
-    logger.info params
+    props = params["props"]
+    (1..50).each do |inc|
+      if props.has_key?("new_name_#{inc}") && props["new_name_#{inc}"].length > 1
+        prop = Property.find_or_create_by(name: props["new_name_#{inc}"])
+        attrs = {
+          holder_model: props["select_holder_model_#{inc}"],
+          category: props["new_category_#{inc}"],
+          position: props["new_position_#{inc}"],
+          tip: props["new_tip_#{inc}"],
+          updated_by_id: current_user.id
+        }
+        prop.update_attributes attrs
+        logger.info "Adding Property: #{prop.inspect}"
+      else
+        break
+      end
+    end
+    redirect_to properties_path
   end
   
   private
@@ -87,6 +109,6 @@ class PropertiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.require(:property).permit(:name, :description, :category, :holder_model, :created_by_id, :created_at, :associated_model, :form_increment)
+      params.require(:property).permit(:name, :description, :category, :holder_model, :tip, :position, :updated_by_id, :created_at, :associated_model, :form_increment)
     end
 end

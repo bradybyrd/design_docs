@@ -2,16 +2,18 @@
   <div class='form-group'>
       <%= f.hidden_field :name %>
       <%= hidden_field_tag "associated_model", "#{@record.class.to_s.underscore}__#{@record.id}" %>
+      <%= hidden_field_tag "add_action", "inset" %>
       <%= hidden_field_tag "add_property_target_url", properties_add_new_property_path %>
     <table class="table">
       <thead>
         <tr>
-          <th class='col-md-3'>Property</th>
-          <th>Category</th>
+          <th class='col-md-4'>Property</th>
+          <th class='col-md-1'>Category</th>
           <th class='col-md-1'>Pos</th>
-          <th class='col-md-3'>Data</th>
-          <th>Actions</th>
-          <th><small>Modified</small></th>
+          <th class='col-md-1'>Tip</th>
+          <th class='col-md-2'>Data</th>
+          <th class='col-md-1'>Actions</th>
+          <th class='col-md-2'><small>Modified</small></th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +28,7 @@
             </td>
             <td><%= text_field_tag "props[category_#{inc}]", prop.category %></td>
             <td><%= text_field_tag "props[position_#{inc}]", prop.position %></td>
+            <td><%= text_field_tag "props[tip_#{inc}]", prop.tip, placeholder: "user tip e.g. meters" %></td>
             <td><%= text_field_tag "props[data_#{inc}]", '' %></td>
             <td><%=link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <td></td>
@@ -41,18 +44,20 @@
               </td>
               <td><%= text_field_tag "props[category_#{inc}]", prop.category %></td>
               <td><%= text_field_tag "props[position_#{inc}]", prop.position, placeholder: "sort position" %></td>
-              <td><%= text_field_tag "props[data_#{inc}]", pv.data %></td>
+              <td><%= text_field_tag "props[tip_#{inc}]", prop.tip, placeholder: "user tip e.g. meters" %></td>
+              <td><%= text_field_tag "props[data_#{inc}]", pv.data %><span class="help-block small" style="display:inline;"><%= prop.tip %></span></td>
               <td></td>
-              <td><span class="help-block small" style='display: inline; color: #333;'><%= pv.creator%></span></td>
+              <td class="text-nowrap"><span class="help-block small" style='display: inline; color: #333;'><%= pv.creator%></span></td>
             </tr>
-            <td>
-              <td colspan='6'>
-                <%= link_to 'Add Property', '#', id: "add_property_table" %>
-                <%= hidden_field_tag "form_increment", inc + 1 %>
-              </td>
           <% end %>
         <% end %>
       <% end %>
+      <tr>
+        <td colspan='7'>
+          <%= link_to 'Add Property', '#', id: "add_property_table" %>
+          <%= hidden_field_tag "form_increment", inc + 1 %>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>

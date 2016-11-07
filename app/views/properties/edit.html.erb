@@ -1,9 +1,10 @@
-<h3>Edit Property</h3>
+<h4>Edit Property</h4>
+<%= link_to ' << Back', properties_path %>
 <div class="container">
-  <div style="width: 400px;">
-  	<%= render 'form'  %>
-  </div>
-  <h4> Property Values </h4>
-  <%= render "property_values/row" %>
-  <%= link_to ' << Back', properties_path %>
+  <%= render 'form'  %>
+<div class='col-lg-3'>
+  <small>
+    <h5> Property Values </h5>
+    <%= render "property_values/row" %>
+  </small>
 </div>

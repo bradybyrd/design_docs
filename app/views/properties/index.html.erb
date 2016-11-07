@@ -1,31 +1,44 @@
-<p id="notice"><%= notice %></p>
 <div class="container">
   <div class="row">
     <h3>Properties</h3>
     <div class="column" style="width: 100%;">
-      <table class="table table-striped">
+    <%= form_tag("/properties/create_new_properties") do %>
+      <%= hidden_field_tag "associated_model", "none" %>
+      <%= hidden_field_tag "add_action", "index" %>
+      <%= hidden_field_tag "add_property_target_url", properties_add_new_property_path %>
+      <table class="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Holder</th>
-            <th>Created by</th>
-            <th></th>
+            <th class='col-md-4'>Property</th>
+            <th class='col-md-1'>Category</th>
+            <th class='col-md-1'>Tip</th>
+            <th class='col-md-1'>Pos</th>
+            <th class='col-md-2'>Holder</th>
+            <th class='col-md-1'>Actions</th>
           </tr>
         </thead>
         <tbody>
           <% @properties.each do |property| %>
             <tr>
               <td><%= link_to(property.name, edit_property_path(property)) %></td>
+              <td><%= property.category %></td>
+              <td><%= property.tip %></td>
+              <td><%= property.position %></td>
               <td><%= property.holder_model %></td>
-              <td><%= property.created %></td>
-              <td><%= link_to 'Edit', edit_property_path(property) %>|<%= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_property_path(property) %>|<%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe, property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
+          <tr>
+            <td colspan='7'>
+              <div style="height: 20px; overflow:auto;">
+                <h5 style='margin-top:2px;'>Add Properties</h5>
+              </div>
+            </td>
+          </tr>
+          <%= render :partial => 'add_new_property_table' %>
         </tbody>
       </table>
-      <br>
-
-      <%= link_to 'New Property', new_property_path %>
+     <% end %>
     </div>
   </div>
 </div>

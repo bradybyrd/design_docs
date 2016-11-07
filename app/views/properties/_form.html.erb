@@ -1,22 +1,28 @@
-<%= simple_form_for(@property, html: { class: 'form-horizontal' }) do |f| %>
-	<div class='control-group'>
-  <% if @property.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
 
-      <ul>
-      <% @property.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class='col-lg-6'>
+  <%= form_for(@property, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+    <% if @property.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@property.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+        <ul>
+        <% @property.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
+    <%= bootstrap_form_field(f, :holder_model, collection_mapped: Property::HOLDER_MODELS).html_safe  %>
+    <%= bootstrap_form_field(f, :category).html_safe  %>
+    <%= bootstrap_form_field(f, :position).html_safe  %>
+    <%= bootstrap_form_field(f, :tip).html_safe  %>
+    
+    <div class="form-actions" style="float:right;">
+      <%= f.submit(nil, class: "btn-info") %>
     </div>
   <% end %>
-  	<%= f.error_notification %>
-		<%= f.input :name, required: true, autofocus: true %>
-	</div>
-	<div class='control-group'>
-	 	<%= f.input :description %>
-		<%= f.input :holder_model, collection: ["Customer", "Site", "Basin", "SystemSetting"] %>
-		<%= f.button :submit %>
-	</div>
-<% end %>
+
+
+  <br><br><span class='last_modified' style='float:right;'>Site id: <%= "#{@property.id} - #{@property.modified}" %></span>
+</div>

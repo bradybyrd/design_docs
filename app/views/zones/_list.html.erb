@@ -10,13 +10,13 @@
       <% inc = 0 %>
       <% @site.zones.unarchived.ordered.each do |zone| %>
         <tr>
-          <td><%= zone.name %></td>
+          <td><%= text_field_tag "zone[name_#{zone.id}]", zone.name %></td>
           <td><%= zone.basins.count.to_s %></td>
         </tr>
       <% end %>
       <tr>
         <td colspan='2'>
-          <%= link_to 'Add Zone', '#', id: "add_zone_table" %>
+          <%= link_to '<small>Add Zone</small>'.html_safe, '#', id: "add_zone_table", style: "float:right;" %></span>
           <%= hidden_field_tag "form_increment", inc + 1 %>
         </td>
       </tr>

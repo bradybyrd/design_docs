@@ -4,6 +4,7 @@ module Archivable
   end
   
   module ClassMethods
+    
     def archived
       where(%Q{#{self.table_name}.archived_at IS NOT NULL AND #{self.table_name}.archive_number IS NOT NULL})
     end
@@ -41,4 +42,15 @@ module Archivable
       self.update_columns(updater)
     end
   end
+  
+  def set_modified
+    return false if User.current_user.nil?
+    self.updated_by_id = User.current_user.id
+  end
+  
+  def modified
+    user = User.find_by_id(updated_by_id)
+    user.nil? ? "unknown" : "#{user.first_name[0]}#{user.last_name}@#{updated_at.to_s(:simple_time)}"
+  end
+  
 end
