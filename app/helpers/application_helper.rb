@@ -59,7 +59,7 @@ module ApplicationHelper
   end
 
   def bootstrap_property_field(form_ref, property, model_holder, options = {})
-    base_name = "#{form_ref.object.class.name.underscore.downcase}[property_#{property.id}[]]"
+    base_name = "props[#{property.id}[]]"
     label_class = options.fetch(:label_class, "col-sm-4 control-label")
     control_class = options.fetch(:control_class, "col-sm-8")
     help_text = property.tip

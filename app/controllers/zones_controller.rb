@@ -40,9 +40,12 @@ class ZonesController < ApplicationController
   # PATCH/PUT /zones/1
   # PATCH/PUT /zones/1.json
   def update
+    if params.has_key?("props")
+      @zone.update_properties(params["props"]) 
+    end
     respond_to do |format|
       if @zone.update(zone_params)
-        format.html { redirect_to @zone, notice: 'Zone was successfully updated.' }
+        format.html { redirect_to edit_site_path(@zone.site), notice: 'Zone was successfully updated.' }
         format.json { render :show, status: :ok, location: @zone }
       else
         format.html { render :edit }

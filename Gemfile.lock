@@ -38,7 +38,10 @@ GEM
       tzinfo (~> 1.1)
     acts_as_archival (0.6.0)
       activerecord
-    acts_as_commentable (4.0.2)
+    acts_as_commentable_with_threading (2.0.1)
+      activerecord (>= 4.0)
+      activesupport (>= 4.0)
+      awesome_nested_set (>= 3.0)
     addressable (2.4.0)
     arel (6.0.3)
     audited (4.3.0)
@@ -46,6 +49,8 @@ GEM
       rails-observers (~> 0.1.2)
     autoprefixer-rails (6.4.1.1)
       execjs
+    awesome_nested_set (3.1.1)
+      activerecord (>= 4.0.0, < 5.1)
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -249,7 +254,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_archival
-  acts_as_commentable
+  acts_as_commentable_with_threading
   audited (~> 4.3)
   better_errors
   bootstrap-sass

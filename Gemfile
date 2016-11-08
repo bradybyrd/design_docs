@@ -14,7 +14,7 @@ gem 'pg'
 gem 'acts_as_archival'
 gem 'simple_form'
 gem 'cancan'
-gem 'acts_as_commentable'
+gem 'acts_as_commentable_with_threading'
 gem 'audited', '~> 4.3'
 
 group :development, :test do

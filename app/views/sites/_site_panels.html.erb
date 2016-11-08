@@ -73,7 +73,7 @@
         </div>
         <div id="basin_design_panel<%=idx %>" class="panel-collapse collapse">
           <div class="panel-body">
-            <%= render :partial => 'basins/design_form', locals: {basin: basin} %>
+            <%= render :partial => 'properties/property_form', locals: {record: basin, conditions: ["Design", "Conditions"] } %>
           </div>
         </div>
       </div>

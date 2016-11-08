@@ -48,13 +48,13 @@ class SitesController < ApplicationController
   # PATCH/PUT /sites/1.json
   def update
     respond_to do |format|
-      if params.has_key?("add_property_target_url")
+      if params.has_key?("props")
         @site.update_properties(params["props"]) 
       end
       if @site.update(site_params)
         set_updater
         add_or_update_zones(params["zone"])
-        format.html { redirect_to sites_url, notice: 'Site was successfully updated.' }
+        format.html { redirect_to edit_site_path(@site), notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
       else
         format.html { render :edit }
@@ -74,6 +74,7 @@ class SitesController < ApplicationController
   end
   
   def add_or_update_zones(zone_params)
+    return if zone_params.nil?
     zone_params.each do |key,val|
       if key.include?("new_name")
         zone = @site.zones.create(name: val)

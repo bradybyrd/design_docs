@@ -25,6 +25,20 @@ module PropertyMethods
   
   def update_properties(prop_params)
     logger.info "Updating Properties: #{prop_params}"
+    self.properties_for_input.each do |prop|
+      if prop_params[prop.id.to_s].present?
+        if prop_params[prop.id.to_s]["data"] != prop.value_data && !(prop.value_data.nil? && prop_params[prop.id.to_s]["data"].blank?)
+          logger.info "Adding new property_value: #{prop.id} - #{prop_params[prop.id.to_s]["data"]}"
+          prop.property_values.create({holder_id: self.id, data: prop_params[prop.id.to_s]["data"], created_by_id: User.current_user.id})
+        else
+          logger.info "Prop unchanged: #{prop.id} - #{prop.value_data}"
+        end
+      end
+    end  
+  end
+  
+  def not_update_properties(prop_params)
+    logger.info "Updating Properties: #{prop_params}"
     updater = []
     (1..50).each{|l| updater << {} }
     prop_params.each do |key, val|
@@ -46,7 +60,7 @@ module PropertyMethods
   
   def properties_for_input(categories = [])
     result = properties.ordered
-    result = result.where("category IN (?)", categories.join(",")).ordered if categories.size > 0
+    result = result.where("category IN (#{categories.map{|l| "'#{l}'" }.join(",")})").ordered if categories.size > 0
     result.each do |prop|
       prop.value_holder_id = self.id
       values = prop.property_values.for(self.id)
