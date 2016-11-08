@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :customers
   # Dashboard
   root to: 'dashboard#index'
+  # Comments
+  resources :comments
   # Properties
   get 'properties/add_new_property' => 'properties#add_new_property'
   post 'properties/create_new_properties' => 'properties#create_new_properties'

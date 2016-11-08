@@ -33,11 +33,14 @@
   
     <% end %>
   </div>
-  <div class='col-lg-3'>
+  <div class='col-lg-6'>
     <div id='basin_image'>
       <% unless @basin.basin_type.nil? %>
         <%= image_tag("basin_type_#{@basin.basin_type}.gif", alt: 'Basin Type', size: "210x140", class: "img-responsive") %>
       <% end %>
+    </div>
+    <div id='basin_comments'>
+      <%= render partial: "comments/template", locals: {commentable: @basin} %>
     </div>
   </div>
 </div> <!-- Basin Info -->

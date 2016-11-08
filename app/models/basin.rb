@@ -3,7 +3,7 @@ class Basin < ActiveRecord::Base
   include Archivable
   include PropertyMethods
   audited
-  acts_as_commentable :public, :private
+  acts_as_commentable
   
   belongs_to :zone
   

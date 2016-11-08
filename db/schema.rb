@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102144455) do
+ActiveRecord::Schema.define(version: 20161108182413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20161102144455) do
   add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
   create_table "basins", force: :cascade do |t|
-    t.integer  "site_id"
+    t.integer  "zone_id"
     t.string   "name"
     t.float    "depth"
     t.float    "width"
@@ -59,18 +59,20 @@ ActiveRecord::Schema.define(version: 20161102144455) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string   "title",            limit: 50, default: ""
-    t.text     "comment"
     t.integer  "commentable_id"
     t.string   "commentable_type"
-    t.integer  "user_id"
-    t.string   "role",                        default: "comments"
+    t.string   "title"
+    t.text     "body"
+    t.string   "subject"
+    t.integer  "user_id",          null: false
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
-  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
@@ -98,13 +100,15 @@ ActiveRecord::Schema.define(version: 20161102144455) do
     t.string   "name"
     t.text     "description"
     t.string   "holder_model"
-    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "archive_number"
     t.datetime "archived_at"
     t.string   "category"
     t.integer  "position"
+    t.string   "tip"
+    t.text     "choices"
   end
 
   create_table "property_values", force: :cascade do |t|

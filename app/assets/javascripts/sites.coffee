@@ -12,3 +12,7 @@ $(document).on 'click', 'form #add_zone_table', (event) ->
            success: (data) ->
              $('#form_increment').parent().parent().replaceWith(data);
 
+$(document).on 'click', '.comment-reply', (event) ->
+  event.preventDefault();
+  $(this).closest('.comment').find('.reply-form').toggle()
+

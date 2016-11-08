@@ -2,7 +2,7 @@ class Zone < ActiveRecord::Base
   include Archivable
   include PropertyMethods
   audited
-  acts_as_commentable :public, :private
+  acts_as_commentable
   
   has_many :basins
   belongs_to :site
