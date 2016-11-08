@@ -1,10 +1,12 @@
-<%= form_for new_comment do |f| %>  
+<small>
+<%= form_for(new_comment, html: {class: 'form-horizontal edit_comment', role: 'form'}) do |f| %>  
   <%= f.hidden_field :commentable_id, value: new_comment.commentable_id %>
   <%= f.hidden_field :commentable_type, value: new_comment.commentable_type %>
-  <div class="field form-group">
+  <div class="field form-group" style="margin-left:25px;">
     <%= f.text_area :body, class: 'form-control' %>
   </div>
-  <div class="field form-group">
-    <%= submit_tag "Post comment", class: 'btn btn-primary' %>
+  <div class="form-actions" style="margin-left:25px;">
+    <%= submit_tag "Post comment", class: 'btn-sm btn-info' %>
   </div>
 <% end %>  
+</small>
