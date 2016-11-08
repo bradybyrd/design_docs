@@ -1,5 +1,6 @@
 <small>
 <%= form_for(new_comment, html: {class: 'form-horizontal edit_comment', role: 'form'}) do |f| %>  
+  <%= hidden_field_tag "active_panel", panel %>
   <%= f.hidden_field :commentable_id, value: new_comment.commentable_id %>
   <%= f.hidden_field :commentable_type, value: new_comment.commentable_type %>
   <div class="field form-group" style="margin-left:25px;">

@@ -13,6 +13,7 @@
         </div>
       <% end %>
       <div class='form-group'>
+        <%= hidden_field_tag "active_panel", panel %>
         <%= hidden_field_tag "input_form_properties", record.class.name.underscore.downcase %>
         <%= hidden_field_tag "#{record.class.name.underscore.downcase}[name]", record.name %>
         <% record.properties_for_input(conditions).each do |prop| %>

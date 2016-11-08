@@ -9,9 +9,9 @@
         </a> 
       </h4>
     </div>
-    <div id="site_basics_panel" class="panel-collapse collapse in">
+    <div id="site_basics_panel" class="panel-collapse collapse<%= @active_panel == 'site_info' ? ' in' : '' %>">
       <div class="panel-body">
-        <%= render :partial => 'form' %>
+        <%= render :partial => 'form', locals: {panel: 'site_info'} %>
       </div>
     </div>
   </div>
@@ -24,9 +24,9 @@
         </a> 
       </h4>
     </div>
-    <div id="climate_panel" class="panel-collapse collapse">
+    <div id="climate_panel" class="panel-collapse collapse<%= @active_panel == 'site_climate' ? ' in' : '' %>">
       <div class="panel-body">
-        <%= render :partial => 'properties/property_form', locals: {record: @site, conditions: ["Climate"] } %>
+        <%= render :partial => 'properties/property_form', locals: {record: @site, conditions: ["Climate"], panel: 'site_climate' } %>
       </div>
     </div>
   </div>
@@ -40,9 +40,9 @@
           </a> 
         </h4>
       </div>
-      <div id="influent_panel_<%= zone.id %>" class="panel-collapse collapse">
+      <div id="influent_panel_<%= zone.id %>" class="panel-collapse collapse<%= @active_panel == "zone_influent_#{zone.id}" ? ' in' : '' %>">
         <div class="panel-body">
-          <%= render :partial => 'properties/property_form', locals: {record: zone, conditions: ["Influent"] } %>
+          <%= render :partial => 'properties/property_form', locals: {record: zone, conditions: ["Influent"], panel: "zone_influent_#{zone.id}" } %>
         </div>
       </div>
     </div>
@@ -56,9 +56,9 @@
             </a> 
           </h4>
         </div>
-        <div id="basin_info_panel<%=idx %>" class="panel-collapse collapse">
+        <div id="basin_info_panel<%=idx %>" class="panel-collapse collapse<%= @active_panel == "basin_info_#{idx}" ? ' in' : '' %>">
           <div class="panel-body">
-            <%= render :partial => 'basins/form', locals: {basin: basin} %>
+            <%= render :partial => 'basins/form', locals: {basin: basin, panel: "basin_info_#{idx}"} %>
           </div>
         </div>
       </div>
@@ -71,9 +71,9 @@
             </a> 
           </h4>
         </div>
-        <div id="basin_design_panel<%=idx %>" class="panel-collapse collapse">
+        <div id="basin_design_panel<%=idx %>" class="panel-collapse collapse<%= @active_panel == "basin_info_#{idx}" ? ' in' : '' %>">
           <div class="panel-body">
-            <%= render :partial => 'properties/property_form', locals: {record: basin, conditions: ["Design", "Conditions"] } %>
+            <%= render :partial => 'properties/property_form', locals: {record: basin, conditions: ["Design", "Conditions"], panel: "basin_info_#{idx}" } %>
           </div>
         </div>
       </div>

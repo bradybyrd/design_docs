@@ -20,6 +20,9 @@ class SitesController < ApplicationController
 
   # GET /sites/1/edit
   def edit
+    @active_panel = params["active_panel"]
+    @active_panel = session[:active_panel] if @active_panel.nil?
+    @active_panel = 'site_info' if @active_panel.nil?
     @properties = @site.properties
     @record = @site
     @current_tab = params["tab"] || "site_details"
@@ -48,13 +51,14 @@ class SitesController < ApplicationController
   # PATCH/PUT /sites/1.json
   def update
     respond_to do |format|
+      @active_panel = params["active_panel"]
       if params.has_key?("props")
         @site.update_properties(params["props"]) 
       end
       if @site.update(site_params)
         set_updater
         add_or_update_zones(params["zone"])
-        format.html { redirect_to edit_site_path(@site), notice: 'Site was successfully updated.' }
+        format.html { redirect_to edit_site_path(@site, active_panel: @active_panel), notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
       else
         format.html { render :edit }

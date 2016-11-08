@@ -10,6 +10,7 @@
             <%= f.hidden_field :commentable_id, value: new_comment.commentable_id %>
             <%= f.hidden_field :commentable_type, value: new_comment.commentable_type %>
             <%= f.hidden_field :comment_id, value: comment.id %>
+            <%= hidden_field_tag "active_panel", panel %>
             <div>
               <%= f.text_area :body, class: 'form-control' %>
             </div>
@@ -21,6 +22,6 @@
         </small>
       </div>
     </div>
-    <%= render partial: "comments/reply", locals: {comments: comment.children, new_comment: new_comment} %>
+    <%= render partial: "comments/reply", locals: {comments: comment.children, new_comment: new_comment, panel: panel} %>
   </div>
 <% end %> 

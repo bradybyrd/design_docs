@@ -1,17 +1,5 @@
-<ul class='nav nav-tabs'>
-  <%= layout_tabs(@site) %>
-</ul> 
 <%= link_to '<<Back', sites_path %>
 
 <div class="container">
-  <% if @current_tab == "site_details" %>
-	  <!-- <div style="width: 700px;"> -->
-	    <%= render 'site_panels'  %>
-
-  <% elsif @current_tab == "properties" %>
-    <%= render 'properties/edit_properties' %>
-  <% elsif @current_tab == "basins" %>
-    <%= render 'basins/edit_basins' %>
-  <% end %>
+  <%= render 'site_panels'  %>
 </div>
-

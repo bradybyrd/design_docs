@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
   def create
     commentable = commentable_type.constantize.find(commentable_id)
     @comment = Comment.build_from(commentable, current_user.id, body)
-
+    @active_panel = params["active_panel"]
+    session[:active_panel] = @active_panel unless @active_panel.nil?
     respond_to do |format|
       if @comment.save
         make_child_comment

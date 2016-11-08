@@ -24,6 +24,7 @@
       <%= bootstrap_form_field(f, :surface_area, placeholder: "Calculated or input as square meters", help_text: "m<sup>2</sup>").html_safe  %>
       <%= bootstrap_form_field(f, :side_slope_ratio, placeholder: "Slope as a decimal ratio", help_text: "(rise/run)").html_safe  %>
       <%= bootstrap_form_field(f, :volume, volume: "Calculated or input as cubic meters", help_text: "m<sup>3</sup>").html_safe  %>
+      <%= hidden_field_tag "active_panel", panel %>
       <div class="form-actions" style="float:right;">
         <%= f.submit(nil, class: "btn-info") %>
       </div>
@@ -40,7 +41,7 @@
       <% end %>
     </div>
     <div id='basin_comments'>
-      <%= render partial: "comments/template", locals: {commentable: @basin} %>
+      <%= render partial: "comments/template", locals: {commentable: @basin, panel: panel} %>
     </div>
   </div>
 </div> <!-- Basin Info -->

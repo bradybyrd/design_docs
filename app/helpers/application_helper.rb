@@ -81,5 +81,6 @@ module ApplicationHelper
   
   def field_name(prefix, suffix = "")
     prefix.gsub("]]","#{suffix}]]")
-  end  
+  end
+    
 end

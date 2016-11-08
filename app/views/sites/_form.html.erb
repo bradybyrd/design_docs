@@ -20,6 +20,7 @@
     <%= bootstrap_form_field(f, :zip, placeholder: "Zip/Postal code").html_safe  %>
     <%= bootstrap_form_field(f, :phone, placeholder: "Phone number ###-###-####").html_safe  %>
     <%= bootstrap_form_field(f, :gps, placeholder: "GPS location coordinates").html_safe  %>
+    <%= hidden_field_tag "active_panel", panel %>
     <% if @site.new_record? %>
       <%= bootstrap_form_field(f, 'initial_zone', seed_value: "Zone1", placeholder: "name for zone, stage or design scenario").html_safe  %>
     <% else %>
@@ -35,7 +36,7 @@
 </div>
 <div class='col-lg-6'>
   <div id='site_comments'>
-    <%= render partial: "comments/template", locals: {commentable: @site} %>
+    <%= render partial: "comments/template", locals: {commentable: @site, panel: panel} %>
   </div>
   
 </div>

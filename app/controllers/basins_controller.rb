@@ -39,7 +39,7 @@ class BasinsController < ApplicationController
           if params[:embed] && params[:embed] == 'true' 
             redirect_to @basin, notice: 'Basin was successfully created.' 
           else
-            redirect_to edit_site_path(@basin.site, tab: 'basins')
+            redirect_to edit_site_path(@basin.zone.site, active_panel: @active_panel)
           end
           }
         format.json { render :show, status: :created, location: @basin }
@@ -53,9 +53,14 @@ class BasinsController < ApplicationController
   # PATCH/PUT /basins/1
   # PATCH/PUT /basins/1.json
   def update
+    @active_panel = params["active_panel"]
     respond_to do |format|
       if @basin.update(basin_params)
-        format.html { redirect_to @basin, notice: 'Basin was successfully updated.' }
+        if @active_panel.nil?
+          format.html { redirect_to @basin, notice: 'Basin was successfully updated.' }
+        else
+          format.html { redirect_to edit_site_path(@basin.zone.site, active_panel: @active_panel) }
+        end
         format.json { render :show, status: :ok, location: @basin }
       else
         format.html { render :edit }
