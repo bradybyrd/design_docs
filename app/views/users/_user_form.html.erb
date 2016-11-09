@@ -1,5 +1,5 @@
 <div class='col-lg-6'>
-  <%= form_for(@user, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+  <%= form_for(@user, html: {multipart: true, class: 'form-horizontal', role: 'form'}) do |f| %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@user.errors.count, "error") %> prohibited this record from being saved:</h2>
@@ -16,16 +16,16 @@
     <%= bootstrap_form_field(f, :last_name).html_safe  %>
     <%= bootstrap_form_field(f, :customer_id, collection: Customer.unarchived).html_safe  %>
     <%= bootstrap_form_field(f, :role, collection_mapped: User.roles.keys.map {|role| [role.titleize,role]}).html_safe  %>
-    <div id="password_group">
+    <div id="password_group" style="display:none;">
       <span class="help-inline" id="confirm_message" style="color: red;"></span>
       <%= bootstrap_form_field(f, :password, password: true).html_safe  %>
       <%= bootstrap_form_field(f, :password_confirmation, password: true).html_safe  %>
     </div>
     <div class="form-group" id="form-group">
-      <%= f.label :photo, class: "col-sm-4 control-label" %>
+      <%= f.label :attachment, class: "col-sm-4 control-label" %>
       <div class="col-sm-8">
-        <%= f.file_field :photo_path %>
-        <%= f.submit "Upload", class: "btn-info btn-sm" %>
+        <%= f.file_field :attachment, style: "display:inline" %>
+        <%= f.submit "Upload", class: "btn-info btn-sm", style: "float:right;" %>
       </div>
     </div>
 
@@ -38,6 +38,8 @@
   <br><br><p class='text-right'><small>User id: <%= "#{@user.id} - #{@user.modified}" %></small></p>
 </div>
 <div class='col-lg-6'>
-  
+  <% if @user.attachment.present? %>
+    <%= image_tag(@user.attachment, alt: 'User Photo', size: "100x130", class: "img-responsive") %>
+  <% end %>
 </div>
 

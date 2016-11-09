@@ -72,9 +72,9 @@ class BasinsController < ApplicationController
   # DELETE /basins/1
   # DELETE /basins/1.json
   def destroy
-    @basin.destroy
+    @basin.archive
     respond_to do |format|
-      format.html { redirect_to basins_url, notice: 'Basin was successfully destroyed.' }
+      format.html { redirect_to basins_url, notice: 'Basin was successfully archived.' }
       format.json { head :no_content }
     end
   end

@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   
   include Archivable
   
+  mount_uploader :attachment, AttachmentUploader
+  
   belongs_to :customer
   after_initialize :set_default_role, :if => :new_record?
 

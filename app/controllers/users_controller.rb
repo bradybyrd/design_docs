@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_only, :except => :show
-
+  MINIMUM_PASSWORD_LENGTH = 8
+  
   def index
     @users = User.all
   end
 
-  def show
+  def edit
     @user = User.find(params[:id])
     unless current_user.admin?
       unless @user == current_user
@@ -36,12 +37,15 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "User updated."
     else
       redirect_to users_path, :alert => "Unable to update user."
+      @user.errors.full_messages.each do |message|
+        logger.info message
+      end
     end
   end
 
   def destroy
     user = User.find(params[:id])
-    user.destroy
+    user.archive
     redirect_to users_path, :notice => "User deleted."
   end
 
@@ -54,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :customer_id, :phone, :timezone, :password, :password_confirmation, :role, :photo_path)
+    params.require(:user).permit(:email, :first_name, :last_name, :customer_id, :phone, :timezone, :role, :attachment)
   end
 
 end

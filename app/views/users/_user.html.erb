@@ -1,5 +1,5 @@
 <%= form_for(user) do |f| %>
-	<td><%= link_to user.email, user %></td>
+	<td><%= link_to user.email, edit_user_path(user) %></td>
 	<td><%= f.text_field :first_name %></td>
 	<td><%= f.text_field :last_name %></td>
 	<td><%= f.select(:customer_id, Customer.unarchived.map{|cust| [cust.name, cust.id] })%></td>
@@ -7,5 +7,5 @@
 	<td><%= f.submit 'Update', :class => 'button-xs' %></td>
 <% end %>
 <td>
-  <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+  <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_user_path(user) %>|<%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } unless user == current_user %>
 </td>
