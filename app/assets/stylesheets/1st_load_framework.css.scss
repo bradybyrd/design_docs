@@ -182,3 +182,21 @@ tr.inactive td{
 .comments-show {
   margin-left: 25px;
 }
+
+.circle-image{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background-image:url("http://placekitten.com/g/200/400");
+    display:block;
+    background-position-y:25% 
+}
+
+.circle-image-sm{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background-image:url("http://placekitten.com/g/200/400");
+    display:inline;
+    background-position-y:25% 
+}

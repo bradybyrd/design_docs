@@ -15,9 +15,9 @@ class ApplicationController < ActionController::Base
   
   protected
   
-    def authenticate_user!
+    def authenticate_user!(opts = {})
       if user_signed_in?
-        super
+        super opts
       else
         redirect_to login_path, :notice => 'Please log in'
         ## if you want render 404 page

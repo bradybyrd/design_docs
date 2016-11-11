@@ -14,9 +14,16 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="http://www.wastewater.com/"><%= image_tag("edi_logo.png", alt: 'EDI', size: "45x43", class: "img-responsive", style: "margin-top:-10px;") %></a>
         </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+        </ul>
       </nav>
     </header>
-       <%= render 'layouts/messages' %>
-			 	<%= yield %>
+    <main role="main">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </main>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- script src="https://code.jquery.com/jquery.js"></script -->
   </body>
 </html>

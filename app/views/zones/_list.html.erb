@@ -8,15 +8,17 @@
     </thead>
     <tbody>
       <% inc = 0 %>
-      <% @site.zones.unarchived.ordered.each do |zone| %>
+      <% @site.zones.unarchived.ordered.each_with_index do |zone, idx| %>
         <tr>
-          <td><%= text_field_tag "zone[name_#{zone.id}]", zone.name %></td>
-          <td><%= zone.basins.count.to_s %></td>
+          <td><%= text_field_tag "zone[name_#{zone.id}]", zone.name %>
+          </td>
+          <td><%= zone.basins.count.to_s %>
+          <%= link_to "<span class='glyphicon glyphicon-plus' style='margin-left:10px;'></span>".html_safe, '#', id: "add_basin_table" %></td>
         </tr>
       <% end %>
       <tr>
         <td colspan='2'>
-          <%= link_to '<small>Add Zone</small>'.html_safe, '#', id: "add_zone_table", style: "float:right;" %></span>
+          <%= link_to "<span class='glyphicon glyphicon-plus'></span><small>Add Zone</small>".html_safe, '#', id: "add_zone_table", style: "float:right;" %>
           <%= hidden_field_tag "form_increment", inc + 1 %>
         </td>
       </tr>

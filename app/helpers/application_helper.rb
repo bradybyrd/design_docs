@@ -36,9 +36,11 @@ module ApplicationHelper
     control_class = options.fetch(:control_class, "col-sm-8")
     is_hidden = options.fetch(:hidden, false)
     help_text = options.fetch(:help_text, nil)
+    help_text_below = options.fetch(:help_text_below, nil)
     seed_value = options.fetch(:seed_value, "")
     collection = options.fetch(:collection, nil)
     text_rows = options.fetch(:text_rows, nil)
+    is_email = options.fetch(:email, nil)
     is_password = options.fetch(:password, nil)
     collection_mapped = options.fetch(:collection_mapped, nil)
     collection_mapped = collection.map{|l| [l.name, l.id] } if collection_mapped.nil? && !collection.nil?
@@ -49,6 +51,8 @@ module ApplicationHelper
     result += "\n<div class=\"#{control_class}\">\n"
     if !collection_mapped.nil?
       result += form_ref.select(field, collection_mapped, {}, {class: "form-control", id: field_class_name})
+    elsif is_email
+      result += form_ref.email_field(field, class: "form-control", id: "#{form_ref.object.class.name.underscore.downcase}_#{field}", placeholder: placeholder)
     elsif !text_rows.nil? 
       result += form_ref.text_area(field, class: "form-control", id: "#{form_ref.object.class.name.underscore.downcase}_#{field}", placeholder: placeholder)
     elsif !is_password.nil? 
@@ -58,6 +62,7 @@ module ApplicationHelper
       result += text_field_tag(field, seed_value, class: "form-control", id: "#{form_ref.object.class.name.underscore.downcase}_#{field}", placeholder: placeholder) if field.is_a?(String)
     end
     result += "\n<span class=\"help-block small\" style=\"display:inline;\">#{help_text}</span>\n" unless help_text.nil?
+    result += "\n<span class=\"help-block small\">#{help_text_below}</span>\n" unless help_text_below.nil?
     result += "\n</div>\n</div>\n"
   end
 

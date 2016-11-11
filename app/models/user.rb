@@ -29,4 +29,11 @@ class User < ActiveRecord::Base
     "#{first_name[0]}#{last_name}"
   end
   
+  def picture_url
+    result = "#"
+    if attachment.present?
+      result = attachment.file.file.gsub(Rails.root.to_s,"").gsub("/public/","")
+    end
+    result
+  end
 end

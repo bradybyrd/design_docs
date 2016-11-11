@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  !before_action :authenticate_user!
   before_action :admin_only, :except => :show
   MINIMUM_PASSWORD_LENGTH = 8
   

@@ -3,8 +3,13 @@
     <div class="comment">
       <div class="well well-sm" style="margin-bottom: 3px;border-radius:10px;">
         <small>
-        <%= comment.body %><br>
-        <div class="comment-nav"><a href="#" class="comment-reply">reply</a></div>
+          <% if comment.user.attachment.present? %>
+            <div class="circle-image-sm" style="background-image:url(<%= "#{request.base_url}/#{comment.user.picture_url}" %>);">
+              <%= image_tag(comment.user.attachment, alt: 'User Photo', class: "circle-image-sm") %>
+            </div>
+          <% end %>
+        <span style="margin-left:15px;"><%= comment.body %></span>
+        <div class="comment-nav" style="margin-left:70px;margin-top:-14px;"><a href="#" class="comment-reply">reply</a></div>
         <div class="reply-form">
           <%= form_for(new_comment, html: {class: 'form-horizontal edit_reply', role: 'form'}) do |f| %>
             <%= f.hidden_field :commentable_id, value: new_comment.commentable_id %>
