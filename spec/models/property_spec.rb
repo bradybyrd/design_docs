@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Property, type: :model do
   before(:each) do
-    @customer = create(:customer)
-    @site = create(:site_with_properties_and_values, customer_id: @customer.id)
+    @company = create(:company)
+    @site = create(:site_with_properties_and_values, company_id: @company.id)
     @property = @site.properties.first
   end
   

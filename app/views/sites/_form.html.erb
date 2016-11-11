@@ -12,7 +12,7 @@
       </div>
     <% end %>
     <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
-    <%= bootstrap_form_field(f, :customer_id, collection: Customer.unarchived).html_safe  %>
+    <%= bootstrap_form_field(f, :company_id, collection: Company.unarchived).html_safe  %>
     <%= bootstrap_form_field(f, :address1).html_safe  %>
     <%= bootstrap_form_field(f, :address2).html_safe  %>
     <%= bootstrap_form_field(f, :city).html_safe  %>

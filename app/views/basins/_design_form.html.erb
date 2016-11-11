@@ -13,7 +13,7 @@
         </div>
       <% end %>
       <% is_cyl = (!@basin.basin_type.nil? && @basin.basin_type == "cylindrical") %>
-      <%= bootstrap_form_field(f, :zone_id, collection: current_user.customer.sites.unarchived.ordered).html_safe  %>
+      <%= bootstrap_form_field(f, :zone_id, collection: current_user.company.sites.unarchived.ordered).html_safe  %>
       <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
       <%= bootstrap_form_field(f, :basin_type, collection_mapped: Basin.basin_types.keys.map {|btype| [btype.titleize,btype]}).html_safe  %>
       <%= bootstrap_form_field(f, :depth, placeholder: "Depth to water line in meters", help_text: "meters").html_safe  %>

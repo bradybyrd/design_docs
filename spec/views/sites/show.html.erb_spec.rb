@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "sites/show", type: :view do
   before(:each) do
     @site = assign(:site, Site.create!(
-      :customer_id => 2,
+      :company_id => 2,
       :address1 => "Address1",
       :address2 => "Address2",
       :city => "City",

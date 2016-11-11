@@ -1,4 +1,4 @@
-class Customer < ActiveRecord::Base
+class Company < ActiveRecord::Base
   include Archivable
   
   has_many :users

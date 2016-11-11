@@ -1,21 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe "customers/new", type: :view do
+RSpec.describe "companies/new", type: :view do
   before(:each) do
-    assign(:customer, Customer.new(
+    assign(:company, Company.new(
       :name => "",
       :description => "MyText"
     ))
   end
 
-  it "renders new customer form" do
+  it "renders new company form" do
     render
 
-    assert_select "form[action=?][method=?]", customers_path, "post" do
+    assert_select "form[action=?][method=?]", companies_path, "post" do
 
-      assert_select "input#customer_name[name=?]", "customer[name]"
+      assert_select "input#company_name[name=?]", "company[name]"
 
-      assert_select "textarea#customer_description[name=?]", "customer[description]"
+      assert_select "textarea#company_description[name=?]", "company[description]"
     end
   end
 end

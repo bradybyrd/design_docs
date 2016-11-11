@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20161108220809) do
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
-  create_table "customers", force: :cascade do |t|
+  create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",     null: false
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20161108220809) do
   end
 
   create_table "sites", force: :cascade do |t|
-    t.integer  "customer_id"
+    t.integer  "company_id"
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20161108220809) do
     t.datetime "updated_at",                          null: false
     t.integer  "role"
     t.string   "first_name"
-    t.integer  "customer_id"
+    t.integer  "company_id"
     t.string   "last_name"
     t.string   "phone"
     t.string   "timezone"

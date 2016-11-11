@@ -6,7 +6,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Customer</th>
+            <th>Company</th>
             <th>Name</th>
             <th>City</th>
             <th>State</th>
@@ -17,7 +17,7 @@
         <tbody>
           <% @sites.each do |site| %>
             <tr>
-              <td><%= link_to site.customer.name, edit_site_path(site) %></td>
+              <td><%= link_to site.company.name, edit_site_path(site) %></td>
               <td><%= site.name %></td>
               <td><%= site.city %></td>
               <td><%= site.state %></td>

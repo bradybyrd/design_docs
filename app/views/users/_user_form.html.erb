@@ -21,7 +21,7 @@
     <%= bootstrap_form_field(f, :email).html_safe  %>
     <%= bootstrap_form_field(f, :first_name).html_safe  %>
     <%= bootstrap_form_field(f, :last_name).html_safe  %>
-    <%= bootstrap_form_field(f, :customer_id, collection: Customer.unarchived).html_safe  %>
+    <%= bootstrap_form_field(f, :company_id, collection: Company.unarchived).html_safe  %>
     <%= bootstrap_form_field(f, :role, collection_mapped: User.roles.keys.map {|role| [role.titleize,role]}).html_safe  %>
     <div class="form-group" id="form-group">
       <%= f.label 'Picture/Avatar', class: "col-sm-4 control-label" %>

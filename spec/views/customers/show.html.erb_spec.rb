@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "customers/show", type: :view do
+RSpec.describe "companies/show", type: :view do
   before(:each) do
-    @customer = assign(:customer, Customer.create!(
+    @company = assign(:company, Company.create!(
       :name => "",
       :description => "MyText"
     ))

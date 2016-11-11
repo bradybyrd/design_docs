@@ -1,10 +1,10 @@
-<%= form_for(@customer, html: {class: 'form-horizontal edit_basin', role: 'form'}) do |f| %>
-  <% if @customer.errors.any? %>
+<%= form_for(@company, html: {class: 'form-horizontal edit_basin', role: 'form'}) do |f| %>
+  <% if @company.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
       <ul>
-      <% @customer.errors.full_messages.each do |message| %>
+      <% @company.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

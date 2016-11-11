@@ -103,8 +103,8 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      #(:customer_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps)
+      #(:company_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps)
       #allowed = params.keys.select{|l| }
-      params.require(:site).permit(:customer_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps)
+      params.require(:site).permit(:company_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps)
     end
 end

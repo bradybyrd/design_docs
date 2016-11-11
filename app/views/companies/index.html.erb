@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
   <div class="row">
-    <h4>Customers</h4>
+    <h4>Companys</h4>
     <div class="column">
       <table class="table">
         <thead>
@@ -12,18 +12,18 @@
           </tr>
         </thead>
         <tbody>
-          <% @customers.each do |customer| %>
+          <% @companies.each do |company| %>
             <tr>
-                <td><%= customer.name %></td>
-                <td><%= customer.description %></td>
-                <td><%= link_to 'Edit', edit_customer_path(customer) %>|<%= link_to 'Delete', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= company.name %></td>
+                <td><%= company.description %></td>
+                <td><%= link_to 'Edit', edit_company_path(company) %>|<%= link_to 'Delete', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
 	  	<br>
 
-		  <%= link_to 'New Customer', new_customer_path %>
+		  <%= link_to 'New Company', new_company_path %>
     </div>
   </div>
 </div>

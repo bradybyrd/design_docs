@@ -1,21 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe "customers/edit", type: :view do
+RSpec.describe "companies/edit", type: :view do
   before(:each) do
-    @customer = assign(:customer, Customer.create!(
+    @company = assign(:company, Company.create!(
       :name => "",
       :description => "MyText"
     ))
   end
 
-  it "renders the edit customer form" do
+  it "renders the edit company form" do
     render
 
-    assert_select "form[action=?][method=?]", customer_path(@customer), "post" do
+    assert_select "form[action=?][method=?]", company_path(@company), "post" do
 
-      assert_select "input#customer_name[name=?]", "customer[name]"
+      assert_select "input#company_name[name=?]", "company[name]"
 
-      assert_select "textarea#customer_description[name=?]", "customer[description]"
+      assert_select "textarea#company_description[name=?]", "company[description]"
     end
   end
 end

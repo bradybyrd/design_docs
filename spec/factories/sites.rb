@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :site do
-    customer_id 1
+    company_id 1
     name "Site Name with a lot of detail"
     address1 "22 Butterscotch Court"
     address2 "Suite 3700"

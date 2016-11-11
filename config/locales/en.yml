@@ -21,13 +21,13 @@
 
 en:
   site: Site
-  customer: Customer
+  company: Company
   property: Property
   basin: Basin
   user: User
   dashboard:
     index:
-      welcome_back: "Welcome Back %{first_name} from %{customer_name}"
+      welcome_back: "Welcome Back %{first_name} from %{company_name}"
       create_new_model: "Create New %{model}"
       add_model: "Add %{model}"
       model_information: "%{model} Information"

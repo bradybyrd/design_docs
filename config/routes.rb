@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   # Basins
   get 'basins/:id/edit_form' => 'basins#edit_form'
   resources :basins
-  # Customers
-  resources :customers
+  # Companys
+  resources :companies
   # Dashboard
   root to: 'dashboard#index'
   # Comments

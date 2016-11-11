@@ -41,20 +41,20 @@ Inside your views, use the 'simple_form_for' with one of the Bootstrap form
     = simple_form_for(@user, html: { class: 'form-horizontal' }) do |form|
 		
 ## Adding Models:
-	rails g scaffold Customer name:string
+	rails g scaffold Company name:string
 	
 	rails g model Discussion user_id:integer:index body:text holder_model:string holder_id:integer parent_id:integer
 	
-	rails g scaffold Customer name:string, description:text
+	rails g scaffold Company name:string, description:text
 	
-	rails g scaffold Site customer_id:integer address1:string address2:string city:string state:string zip:string phone:string gps:string
+	rails g scaffold Site company_id:integer address1:string address2:string city:string state:string zip:string phone:string gps:string
 	
 	rails g scaffold Property name:string, description:text holder_model:string holder_id:integer created_by_id:integer created_at:datetime
 	
 	rails g model PropertyValue property_id:integer data:string archived_at:datetime archived_by_id:integer
 	
 TreatmentDesign
-Customer
+Company
 	id
 	name
 User
@@ -108,7 +108,7 @@ Constant
 Site
 	id
 	name
-	customer_id
+	company_id
 	constant_set_id
 	elevation
 	description

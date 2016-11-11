@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "sites/edit", type: :view do
   before(:each) do
     @site = assign(:site, Site.create!(
-      :customer_id => 1,
+      :company_id => 1,
       :address1 => "MyString",
       :address2 => "MyString",
       :city => "MyString",
@@ -19,7 +19,7 @@ RSpec.describe "sites/edit", type: :view do
 
     assert_select "form[action=?][method=?]", site_path(@site), "post" do
 
-      assert_select "input#site_customer_id[name=?]", "site[customer_id]"
+      assert_select "input#site_company_id[name=?]", "site[company_id]"
 
       assert_select "input#site_address1[name=?]", "site[address1]"
 

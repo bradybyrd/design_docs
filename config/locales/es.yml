@@ -2,14 +2,14 @@
 
 es:
   site: Sitio
-  customer: Customer
+  company: Company
   property: Propiedad
   basin: Cuenca
   user: Usuario
   submit: Presentar
   dashboard:
     index:
-      welcome_back: "Bienvenido de nuevo %{first_name} de %{customer_name}"
+      welcome_back: "Bienvenido de nuevo %{first_name} de %{company_name}"
       create_new_model: "Crear nueva %{model}"
       add_model: "Añadir %{model}"
       model_information: "%{model} Información"

@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   
   mount_uploader :attachment, AttachmentUploader
   
-  belongs_to :customer
+  belongs_to :company
   after_initialize :set_default_role, :if => :new_record?
 
   def self.current_user

@@ -27,7 +27,7 @@ module ApplicationHelper
   #<div class="form-group" id="form-group">
   #  <%= f.label :site_id, class: "col-sm-2 control-label" %>
   #  <div class="col-sm-10">
-  #    <%= f.select :site_id, current_user.customer.sites.unarchived.ordered.map{|l| [l.name, l.id] }, {}, class: "form-control" %>
+  #    <%= f.select :site_id, current_user.company.sites.unarchived.ordered.map{|l| [l.name, l.id] }, {}, class: "form-control" %>
   #  </div>
   #</div>
   def bootstrap_form_field(form_ref, field, options = {})

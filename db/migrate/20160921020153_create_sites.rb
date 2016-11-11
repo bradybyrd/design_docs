@@ -1,7 +1,7 @@
 class CreateSites < ActiveRecord::Migration
   def change
     create_table :sites do |t|
-      t.integer :customer_id
+      t.integer :company_id
       t.string :name
       t.string :address1
       t.string :address2

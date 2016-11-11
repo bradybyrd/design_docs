@@ -4,7 +4,7 @@ RSpec.describe "sites/index", type: :view do
   before(:each) do
     assign(:sites, [
       Site.create!(
-        :customer_id => 2,
+        :company_id => 2,
         :address1 => "Address1",
         :address2 => "Address2",
         :city => "City",
@@ -14,7 +14,7 @@ RSpec.describe "sites/index", type: :view do
         :gps => "Gps"
       ),
       Site.create!(
-        :customer_id => 2,
+        :company_id => 2,
         :address1 => "Address1",
         :address2 => "Address2",
         :city => "City",

@@ -12,6 +12,17 @@ $(document).on 'click', 'form #add_zone_table', (event) ->
            success: (data) ->
              $('#form_increment').parent().parent().replaceWith(data);
 
+$(document).on 'click', 'form #add_basin_table', (event) ->
+  event.preventDefault();
+  form_increment = $('#form_increment').val()
+  site_id = $('#add_zone_table').closest('form')[0].id.replace("edit_site_","")
+  
+  $.ajax window.location.origin + "/basins/add_basin",
+           type: 'GET',
+           data: {'form_increment' : form_increment, 'site_id' : site_id}
+           success: (data) ->
+             $('#form_increment').parent().parent().replaceWith(data);
+             
 $(document).on 'click', '.comment-reply', (event) ->
   event.preventDefault();
   $(this).closest('.comment').find('.reply-form').toggle()

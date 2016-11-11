@@ -1,7 +1,7 @@
 <div class='container'>
   <div class='row'>
     <div class='col-lg-8'>
-      <h3><%= t('.welcome_back', first_name: current_user.first_name, customer_name: current_user.customer.name) %></h3>
+      <h3><%= t('.welcome_back', first_name: current_user.first_name, company_name: current_user.company.name) %></h3>
       <p><%= link_to "#{t(:user, count: 2)}:", users_path %> <%= User.count %> <%=t('.registered')%></p>
     </div>
     <div class='col-lg-4'>
@@ -16,7 +16,7 @@
     <div class='col-lg-8'>
       <h4><%= t('.model_information', model: t(:site))%></h4>
       <ul class='list-group'>
-        <% current_user.customer.sites.unarchived.each do |site| %>
+        <% current_user.company.sites.unarchived.each do |site| %>
         <li class=list-group-item><span class='glyphicon glyphicon-globe' style="margin:10px; color:#36648b;"></span><%= link_to site.name, edit_site_path(site) %></li>
         <% end %>
       </ul>
