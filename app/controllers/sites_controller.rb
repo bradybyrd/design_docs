@@ -1,11 +1,13 @@
 class SitesController < ApplicationController
+  before_filter :authenticate_user_from_token!
+  
   before_filter :authenticate_user!
-  before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_action :set_site, only: [:show, :edit, :update, :destroy, :site_data]
 
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all
+    @sites = Site.unarchived.ordered
   end
 
   # GET /sites/1
@@ -90,6 +92,10 @@ class SitesController < ApplicationController
       zone.save!
     end
   end
+  
+  def site_data
+    render json: @site.spreadsheet_data
+  end 
     
   private
     # Use callbacks to share common setup or constraints between actions.

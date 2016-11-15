@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'properties/create_new_properties' => 'properties#create_new_properties'
   resources :properties
   # Sites
+  get 'sites/:id/site_data' => 'sites#site_data'
   resources :sites
   # Users and Devise
   devise_scope :user do

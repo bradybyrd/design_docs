@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  require 'base64'
   enum role: [:reporter, :user, :global, :admin]
 
   # Include default devise modules. Others available are:
@@ -36,4 +37,9 @@ class User < ActiveRecord::Base
     end
     result
   end
+  
+  def auth_token
+    Base64.encode64("#{encrypted_password}#{last_name}").gsub("\n","").slice(0..63)
+  end
+  
 end

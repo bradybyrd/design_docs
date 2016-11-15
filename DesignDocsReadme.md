@@ -2,12 +2,12 @@
 10-31-16 Questions:
   Generate a project number
   Product catalog
-  
+
+
 11-2-16 Alex - calculation engine
   Working with SciLab/MatLab on HeadLoss calc - shell function from excel
   HeatLoss could also  be put into this model
-
-
+  
 * Devise Setup *
 Some setup you must do manually if you haven't yet:
 
@@ -149,4 +149,10 @@ Preferences
 	DateTime format
 	Company Name
 	Color Theme
-		
+	
+REST API
+11/15/16 Rest Authentication
+curl -i -H "accept: application/json" -H "Content-type: application/json" -X GET -d  "{\"user_email\":\"rachelebyrd1120@yahoo.com\", \"user_token\":\"JDJhJDExJDlZMUh5LkFmZmJINi9OdEpydllYRi5teS95d0Y4WS5mNk5LcXdFSldM\"}" http://localhost:3000/sites/2/site_data
+?user_email=rachelebyrd1120@yahoo.com&user_token=JDJhJDExJDlZMUh5LkFmZmJINi9OdEpydllYRi5teS95d0Y4WS5mNk5LcXdFSldM
+
+	

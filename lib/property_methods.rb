@@ -1,6 +1,7 @@
 module PropertyMethods
-  def properties
-    Property.where("holder_model = '#{self.class.to_s}' AND archived_at is NULL").order("properties.name")
+  def properties(with_sort = true)
+    props = Property.where("holder_model = '#{self.class.to_s}' AND archived_at is NULL")
+    with_sort ? props.order("properties.name") : props
   end
   
   def current_property_values
@@ -59,7 +60,7 @@ module PropertyMethods
   end
   
   def properties_for_input(categories = [])
-    result = properties.ordered
+    result = properties
     result = result.where("category IN (#{categories.map{|l| "'#{l}'" }.join(",")})").ordered if categories.size > 0
     result.each do |prop|
       prop.value_holder_id = self.id

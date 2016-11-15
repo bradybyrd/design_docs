@@ -10,5 +10,8 @@ class Basin < ActiveRecord::Base
   before_save :set_modified
 
   scope :ordered, -> { order("archive_number DESC, zone_id, name")}
-
+  
+  def zone_name
+    self.zone.name
+  end
 end
