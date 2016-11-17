@@ -1,13 +1,13 @@
 FactoryGirl.define do
   factory :basin do
-    site_id 1
-    name "MyString"
-    depth ""
-    width ""
-    length ""
-    diameter ""
-    volume ""
-    surface_area ""
-    side_slope_ratio ""
+    sequence(:name) {|n| "Tank_#{n}"}
+    depth 5
+    width 15
+    length 20
+    diameter 15
+    volume 705
+    surface_area 124
+    basin_type "rectangular"
+    association :zone
   end
 end

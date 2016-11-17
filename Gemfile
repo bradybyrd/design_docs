@@ -18,26 +18,22 @@ gem 'acts_as_commentable_with_threading'
 gem 'audited', '~> 4.3'
 gem 'carrierwave'
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   gem 'spring'
-end
-gem 'bootstrap-sass'
-gem 'devise'
-gem 'high_voltage'
-group :development do
+  gem 'bootstrap-sass'
+  gem 'devise'
+  gem 'high_voltage'
   gem 'better_errors'
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'spring-commands-rspec'
 end
+
 group :development, :test do
+  gem 'byebug'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
@@ -49,4 +45,6 @@ group :test do
   gem 'selenium-webdriver'
   gem 'rspec-http'
   gem 'poltergeist'
+  gem 'shoulda-matchers'
+  gem 'cucumber-rails', require: false
 end

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :site do
-    company_id 1
-    name "Site Name with a lot of detail"
+    association :company
+    sequence(:name) {|n| "Site Name_#{n}" }
     address1 "22 Butterscotch Court"
     address2 "Suite 3700"
     city "Fairfax"

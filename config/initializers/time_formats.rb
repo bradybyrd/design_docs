@@ -10,7 +10,6 @@ new_formats = {
   :human_mdy => '%A, %B %d, %Y',
   :human_mdy_short => '%a %b %d, %Y',
   :md        => '%b %d',
-  :mdy       => '%b %d, %Y',
   :month     => '%B',
   :my        => '%B %Y',
   :simple    => '%m/%d/%Y',
