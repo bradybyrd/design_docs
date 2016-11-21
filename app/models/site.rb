@@ -19,7 +19,7 @@ class Site < ActiveRecord::Base
     if zone_id.nil? && self.zones.empty?
       result = Basin.where("zone_id = -2")
     else
-      result = Basin.where("zone_id IN (?)", self.zones.map(&:id).join(",")) if zone_id.nil?
+      result = Basin.where("zone_id IN (#{self.zones.map(&:id).join(",")})") if zone_id.nil?
       result = Basin.where("zone_id = ?", zone_id) if !zone_id.nil?
     end
     result.unarchived

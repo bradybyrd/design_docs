@@ -1,6 +1,6 @@
 <div class='col-lg-6'>
   <% if @user.attachment.present? %>
-    <div class="circle-image" style="background-image:url(<%= "#{request.base_url}/#{@user.picture_url}" %>);">
+    <div class="circle-image-div">
       <%= image_tag(@user.attachment, alt: 'User Photo', class: "circle-image") %>
     </div>
   <% else %>

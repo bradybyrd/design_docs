@@ -24,7 +24,7 @@ class SitesController < ApplicationController
   def edit
     @active_panel = params["active_panel"]
     @active_panel = session[:active_panel] if @active_panel.nil?
-    @active_panel = 'site_info' if @active_panel.nil?
+    @active_panel = '' if @active_panel.nil?
     @properties = @site.properties
     @record = @site
     @current_tab = params["tab"] || "site_details"

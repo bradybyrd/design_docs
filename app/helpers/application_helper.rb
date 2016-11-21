@@ -90,5 +90,25 @@ module ApplicationHelper
   def field_name(prefix, suffix = "")
     prefix.gsub("]]","#{suffix}]]")
   end
-    
+  
+  def audit_link(audit)
+    audit_id = audit.auditable_id
+    case audit.auditable_type
+    when "Company"
+      edit_company_path(audit.target)
+    when "Site"
+      edit_site_path(audit.target, active_panel: "site_basics_panel")
+    when "Zone"
+      edit_site_path(audit.target.site, active_panel: "influent_panel_1")
+    when "Basin"
+      edit_site_path(audit.target.zone.site, active_panel: "basin_info_panel0")
+    when "Property"
+      if audit.user.present?
+        edit_site_path(audit.user.company.sites.first)
+      else
+        "#"
+      end
+    end
+  end
+
 end

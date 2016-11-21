@@ -4,8 +4,8 @@
       <div class="well well-sm" style="margin-bottom: 3px;border-radius:10px;">
         <small>
           <% if comment.user.attachment.present? %>
-            <div class="circle-image-sm" style="background-image:url(<%= "#{request.base_url}/#{comment.user.picture_url}" %>);">
-              <%= image_tag(comment.user.attachment, alt: 'User Photo', class: "circle-image-sm") %>
+            <div class="circle-image-div">
+              <%= image_tag(comment.user.attachment, alt: 'User Photo', class: "circle-image-sm image-xsm") %>
             </div>
           <% end %>
         <span style="margin-left:15px;"><%= comment.body %></span>
