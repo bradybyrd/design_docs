@@ -11,7 +11,7 @@ class CreateBasins < ActiveRecord::Migration
       t.float :volume
       t.float :surface_area
       t.float :side_slope_ratio
-      t.string :archive_float
+      t.string :archive_number
       t.datetime :archived_at
       t.integer :updated_by_id
       t.timestamps null: false

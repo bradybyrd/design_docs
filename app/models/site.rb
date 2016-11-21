@@ -22,7 +22,7 @@ class Site < ActiveRecord::Base
       result = Basin.where("zone_id IN (?)", self.zones.map(&:id).join(",")) if zone_id.nil?
       result = Basin.where("zone_id = ?", zone_id) if !zone_id.nil?
     end
-    result
+    result.unarchived
   end
   
   def spreadsheet_data
@@ -52,12 +52,6 @@ class Site < ActiveRecord::Base
     result
   end
   
-  def as_json(options={})
-    super(  :include => {
-            :company => {:only => [:id, :name]},
-          }
-    )
-  end
   private
   
   

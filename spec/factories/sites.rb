@@ -12,10 +12,10 @@ FactoryGirl.define do
     
     factory :site_with_properties_and_values do
       after(:create) do |site|
-        site = create(:site)
         prop = create(:property, holder_model: "Site")
-        prop1 = create(:property, name: 'Next Property Long Name', holder_model: 'Site')
-        pv = create(:property_value, property_id: prop.id, holder_id: site.id )
+        prop1 = create(:property, name: 'Next Property for Site with value', holder_model: 'Site')
+        prop2 = create(:property, name: 'Property for Site with no value', holder_model: 'Site')
+        pv = create(:property_value, property_id: prop.id, holder_id: site.id, data: "First Value" )
         pv = create(:property_value, property_id: prop1.id, holder_id: site.id, data: "Site1Data" )
       end
     end
