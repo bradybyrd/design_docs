@@ -5,4 +5,6 @@ class Company < ActiveRecord::Base
   has_many :sites
   
   validates :name, uniqueness: true
+  
+  scope :ordered, -> { order("companies.archive_number DESC, companies.name")}
 end

@@ -1,4 +1,4 @@
-class CompanysController < ApplicationController
+class CompaniesController < ApplicationController
   before_filter :authenticate_user!
   
   before_action :set_company, only: [:show, :edit, :update, :destroy]
@@ -6,7 +6,7 @@ class CompanysController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.unarchived
+    @companies = Company.unarchived.ordered
   end
 
   # GET /companies/1
