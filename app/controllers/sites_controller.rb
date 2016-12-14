@@ -2,7 +2,7 @@ class SitesController < ApplicationController
   before_filter :authenticate_user_from_token!
   
   before_filter :authenticate_user!
-  before_action :set_site, only: [:show, :edit, :update, :destroy, :site_data]
+  before_action :set_site, only: [:show, :edit, :update, :destroy, :site_data, :upload]
 
   # GET /sites
   # GET /sites.json
@@ -26,6 +26,7 @@ class SitesController < ApplicationController
     @active_panel = session[:active_panel] if @active_panel.nil?
     @active_panel = '' if @active_panel.nil?
     @properties = @site.properties
+    @site.reports.new
     @record = @site
     @current_tab = params["tab"] || "site_details"
   end
@@ -39,6 +40,11 @@ class SitesController < ApplicationController
         set_updater
         if params[:site]["initial_zone"]
           @site.zones.create(name: params[:site]["initial_zone"], updated_by_id: current_user.id)
+        end
+        if params[:reports_attributes]
+          params[:reports_attributes].each do |report|
+            @site.reports.create(image: report[:report_path])
+          end
         end
         format.html { redirect_to @site, notice: 'Site was successfully created.' }
         format.json { render :show, status: :created, location: @site }
@@ -59,6 +65,12 @@ class SitesController < ApplicationController
       end
       if @site.update(site_params)
         set_updater
+        if params[:site][:reports_attributes]
+          #params[:site][:reports_attributes].each do |report|
+            #@site.reports.create(report_path: report[:report_path])
+            @site.reports.create(report_path: params[:site][:reports_attributes][:report_path])
+            #end
+        end
         add_or_update_zones(params["zone"])
         format.html { redirect_to edit_site_path(@site, active_panel: @active_panel), notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
@@ -95,7 +107,7 @@ class SitesController < ApplicationController
   
   def site_data
     render json: @site.spreadsheet_data
-  end 
+  end
     
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -111,6 +123,6 @@ class SitesController < ApplicationController
     def site_params
       #(:company_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps)
       #allowed = params.keys.select{|l| }
-      params.require(:site).permit(:company_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps)
+      params.require(:site).permit(:company_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps, :reports_attributes)
     end
 end

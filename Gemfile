@@ -17,13 +17,13 @@ gem 'cancan'
 gem 'acts_as_commentable_with_threading'
 gem 'audited', '~> 4.3'
 gem 'carrierwave'
+gem 'bootstrap-sass'
 
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'bootstrap-sass'
   gem 'devise'
   gem 'high_voltage'
   gem 'better_errors'
@@ -46,5 +46,5 @@ group :test do
   gem 'rspec-http'
   gem 'poltergeist'
   gem 'shoulda-matchers'
-  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails'
 end

@@ -155,4 +155,9 @@ REST API
 curl -i -H "accept: application/json" -H "Content-type: application/json" -X GET -d  "{\"user_email\":\"rachelebyrd1120@yahoo.com\", \"user_token\":\"JDJhJDExJDlZMUh5LkFmZmJINi9OdEpydllYRi5teS95d0Y4WS5mNk5LcXdFSldM\"}" http://localhost:3000/sites/2/site_data
 ?user_email=rachelebyrd1120@yahoo.com&user_token=JDJhJDExJDlZMUh5LkFmZmJINi9OdEpydllYRi5teS95d0Y4WS5mNk5LcXdFSldM
 
-	
+curl -i -H "accept: application/json" -H "Content-type: application/json" -X GET "http://localhost:3000/sites/2/site_data?user_email=rachelebyrd1120@yahoo.com&user_token=JDJhJDExJDlZMUh5LkFmZmJINi9OdEpydllYRi5teS95d0Y4WS5mNk5LcXdFSldM"
+
+Document Upload
+curl -i -g -H "accept: application/json" -X PUT -F site[reports_attributes[report_path]]=@/Users/bbyrd/Documents/dev/edi/BasinTypes.docx "http://localhost:3000/sites/2?user_email=rachelebyrd1120@yahoo.com&user_token=JDJhJDExJDlZMUh5LkFmZmJINi9OdEpydllYRi5teS95d0Y4WS5mNk5LcXdFSldM"
+
+12/12/16 test users password1

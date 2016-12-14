@@ -4,13 +4,14 @@ class Ability
   def initialize(user)
     if user.admin?
       can :manage, :all
-    elsif user.user?
-      can :manage, [Site, Basin, Property]
+    elsif user.engineer?
+      can :manage, [Site, Basin, Property, Company]
+      cannot :manage, User
     elsif user.reporter?
       can :read, :all
       cannot :read, User
-    elsif user.global?
-      can :manage, :all
+    elsif user.user?
+      can :manage, Site
       cannot :manage, User
     end
       

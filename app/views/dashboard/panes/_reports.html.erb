@@ -1,0 +1,14 @@
+<ul class='list-group'>
+  <% current_user.company.sites.each do |site| %>
+    <% site.reports.order("updated_at DESC").each do |report| %>
+      <li class=list-group-item>
+          <%= link_to report.report_path.file.filename, File.join(report.report_path.store_dir, report.report_path.file.filename), :target => "_blank" %>
+          <span style="margin-left: 50px;"></span>
+          <%= site.name %>
+          <span style="margin-left: 10px;"></span>
+          <small><%= report.updated_at.to_s(:simple_time)%></small>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+

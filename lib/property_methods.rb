@@ -60,7 +60,7 @@ module PropertyMethods
   end
   
   def properties_for_input(categories = [])
-    result = properties
+    result = properties(false)
     result = result.where("category IN (#{categories.map{|l| "'#{l}'" }.join(",")})").ordered if categories.size > 0
     result.each do |prop|
       prop.value_holder_id = self.id

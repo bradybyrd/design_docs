@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <% inc = 0 %>
-        <% @record.properties.unarchived.ordered.each do |prop| %>
+        <% @record.properties(false).ordered.each do |prop| %>
         <% if prop.property_values.empty? %>
           <tr>
             <td>

@@ -10,10 +10,13 @@ class Site < ActiveRecord::Base
   validates :name, presence: true
   validates :company_id, presence: true
   
-  has_many :zones
   belongs_to :company
+  has_many :zones
+  has_many :reports
 
   scope :ordered, -> { order("archive_number DESC, sites.name")}
+  
+  accepts_nested_attributes_for :reports, :allow_destroy => true
   
   def basins(zone_id = nil)
     if zone_id.nil? && self.zones.empty?
