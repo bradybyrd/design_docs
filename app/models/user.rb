@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   
   include Archivable
   
-  mount_uploader :attachment, AttachmentUploader
+  mount_uploader :avatar, AttachmentUploader
   
   belongs_to :company
   after_initialize :set_default_role, :if => :new_record?
@@ -35,8 +35,8 @@ class User < ActiveRecord::Base
   
   def picture_url
     result = "#"
-    if attachment.present?
-      result = attachment.file.file.gsub(Rails.root.to_s,"").gsub("/public/","")
+    if avatar.present?
+      result = avatar.file.file.gsub(Rails.root.to_s,"").gsub("/public/","")
     end
     result
   end

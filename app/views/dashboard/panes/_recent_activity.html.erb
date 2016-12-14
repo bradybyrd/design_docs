@@ -1,9 +1,9 @@
 <ul class='list-group'>
   <% Audit.recent_x.each_with_index do |audit, idx| %>
     <li class=list-group-item>
-      <% if audit.user.present? && audit.user.attachment.present? %>
+      <% if audit.user.present? && audit.user.avatar.present? %>
         <div class="circle-image-div">
-            <%= image_tag(audit.user.attachment, alt: 'User Photo', class: "circle-image-sm image-xsm") %>
+            <%= image_tag(audit.user.avatar, alt: 'User Photo', class: "circle-image-sm image-xsm") %>
         </div>
       <% else %>
         <span style="margin-left: 50px;"></span>

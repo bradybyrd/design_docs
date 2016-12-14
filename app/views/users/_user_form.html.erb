@@ -1,7 +1,7 @@
 <div class='col-lg-6'>
-  <% if @user.attachment.present? %>
+  <% if @user.avatar.present? %>
     <div class="circle-image-div">
-      <%= image_tag(@user.attachment, alt: 'User Photo', class: "circle-image") %>
+      <%= image_tag(@user.avatar, alt: 'User Photo', class: "circle-image") %>
     </div>
   <% else %>
     <h4>New User</h4>
@@ -27,7 +27,7 @@
       <%= f.label 'Picture/Avatar', class: "col-sm-4 control-label" %>
       <div class="col-sm-8">
         <label class="btn btn-default btn-file">
-          Select image <%= f.file_field :attachment, style: "display: none;" %>
+          Select image <%= f.file_field :avatar, style: "display: none;" %>
         </label>
       </div>
     </div>
