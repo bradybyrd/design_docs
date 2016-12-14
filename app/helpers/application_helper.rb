@@ -110,5 +110,19 @@ module ApplicationHelper
       end
     end
   end
+  
+  def attachment_icon(filename)
+    result = case File.extname(filename)
+    when ".pdf"
+      "fa-file-pdf-o"
+    when ".docx", ".doc"
+      "fa-file-word-o"
+    when ".xls", ".xlm", ".xlsx"
+      "fa-file-excel-o"
+    else
+      "fa-file-text-o"
+    end
+    "<i class=\"fa #{result}\"></i>".html_safe
+  end
 
 end

@@ -4,7 +4,7 @@ class CreateReports < ActiveRecord::Migration
       t.string :name
       t.integer :site_id
       t.string :report_path
-      t.integer :created_by_id
+      t.integer :updated_by_id
 
       t.timestamps null: false
     end

@@ -1,16 +1,16 @@
 <ul class='list-group'>
   <% Audit.recent_x.each_with_index do |audit, idx| %>
     <li class=list-group-item>
-      <% if audit.user.present? && audit.user.avatar.present? %>
-        <div class="circle-image-div">
-            <%= image_tag(audit.user.avatar, alt: 'User Photo', class: "circle-image-sm image-xsm") %>
-        </div>
-      <% else %>
-        <span style="margin-left: 50px;"></span>
-      <% end %>
-      <span style="margin-left:4px;"></span>
-      <small><%= audit.auditable_type.downcase %> - </small><a href='<%= audit_link(audit) %>'><%= truncate(audit.target.name, length: 15) %></a> 
+      <div class="circle-image-div" style="float:left;margin-right:10px;">
+        <% if audit.user.present? %>
+          <%= image_tag(audit.user.photo_path, alt: 'User Photo', class: "circle-image-sm image-xsm") %>
+        <% else %>
+          <span style="margin-left: 44px;"></span>
+        <% end %>
+      </div>
+      <div style="padding-left:10px;"><small><%= "#{audit.action}:#{audit.auditable_type}" %> - <a href='<%= audit_link(audit) %>'><%= truncate(audit.target.name, length: 40) %></a> </small><br>
       <span class="tiny-text"><%= "#{audit.created_at.to_s(:simple_time)}-#{audit.user.try(:last_name)}" %></span>
+    </div>
     </li>
     <% break if idx > 3 %>
   <% end %>

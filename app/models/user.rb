@@ -33,10 +33,12 @@ class User < ActiveRecord::Base
     "#{first_name[0]}#{last_name}"
   end
   
-  def picture_url
+  def photo_path
     result = "#"
     if avatar.present?
-      result = avatar.file.file.gsub(Rails.root.to_s,"").gsub("/public/","")
+      result = avatar.file.file.gsub(Rails.root.to_s,"").gsub("/public","")
+    else
+      result = "/assets/no_photo.gif"
     end
     result
   end

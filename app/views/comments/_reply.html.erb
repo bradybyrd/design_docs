@@ -3,9 +3,9 @@
     <div class="comment">
       <div class="well well-sm" style="margin-bottom: 3px;border-radius:10px;">
         <small>
-          <% if comment.user.avatar.present? %>
+          <% if comment.user.present? %>
             <div class="circle-image-div">
-              <%= image_tag(comment.user.avatar, alt: 'User Photo', class: "circle-image-sm image-xsm") %>
+              <%= image_tag(comment.user.photo_path, alt: 'User Photo', class: "circle-image-sm image-xsm") %>
             </div>
           <% end %>
         <span style="margin-left:15px;"><%= comment.body %></span>

@@ -2,6 +2,12 @@
   <div class="row">
     <div class='col-lg-8'>
       <h4>Edit <%= resource_name.to_s.humanize %></h4>
+      <% if resource.avatar.present? %>
+        <div class="circle-image-div">
+          <%= image_tag(resource.avatar, alt: 'User Photo', class: "circle-image") %>
+        </div>
+      <% end %>
+      
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal', role: 'form' }) do |f| %>
         <%= devise_error_messages! %>
         <%= bootstrap_form_field(f, :email, email: true).html_safe  %>
