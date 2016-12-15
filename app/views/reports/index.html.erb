@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <h3>Reports</h3>
+    <div class="column" style='width: 100%;'>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Company|Site</th>
+            <th>File</th>
+            <th>Name</th>
+            <th>Modified</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reports.ordered.each do |report| %>
+            <tr>
+              <td><%= link_to "#{report.site.company.name}:#{report.site.name}", edit_site_path(report.site) %></td>
+              <td><%= link_to "#{attachment_icon(report.report_path.file.filename)}&nbsp;&nbsp;#{report.report_path.file.filename}".html_safe, File.join(report.report_path.store_dir, report.report_path.file.filename), :target => "_blank" %></td>
+              <td><%= report.name %></td>
+              <td><small><%= report.modified %></small></td>
+              <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

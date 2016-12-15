@@ -6,5 +6,5 @@ class Report < ActiveRecord::Base
   
   mount_uploader :report_path, AttachmentUploader
   
-  
+  scope :ordered, -> { includes(:site).order("sites.name, reports.created_at DESC")}
 end
