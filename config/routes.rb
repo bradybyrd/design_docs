@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :properties
   # Sites
   get 'sites/:id/site_data' => 'sites#site_data'
+  post 'sites/:id/upload' => 'sites#upload'
   resources :sites
   # Users and Devise
   devise_scope :user do

@@ -65,12 +65,6 @@ class SitesController < ApplicationController
       end
       if @site.update(site_params)
         set_updater
-        if params[:site][:reports_attributes]
-          #params[:site][:reports_attributes].each do |report|
-            #@site.reports.create(report_path: report[:report_path])
-            @site.reports.create(report_path: params[:site][:reports_attributes][:report_path])
-            #end
-        end
         add_or_update_zones(params["zone"])
         format.html { redirect_to edit_site_path(@site, active_panel: @active_panel), notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
@@ -107,6 +101,20 @@ class SitesController < ApplicationController
   
   def site_data
     render json: @site.spreadsheet_data
+  end
+  
+  # POST /sites/1/upload
+  def upload
+    respond_to do |format|
+      if params[:site][:reports_attributes]
+        @site.reports.create(report_path: params[:site][:reports_attributes][:report_path])
+        format.html { redirect_to edit_site_path(@site, active_panel: @active_panel), notice: 'Site was successfully updated.' }
+        format.json { render :show, status: :ok, location: @site }
+      else
+        format.html { render :edit }
+        format.json { render json: @site.errors, status: :unprocessable_entity }
+      end
+    end
   end
     
   private

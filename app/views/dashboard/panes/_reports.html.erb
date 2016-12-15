@@ -9,7 +9,7 @@
           <td>
             <%= site.name %>
             <span style="margin-left: 10px;"></span>
-            <small><%= report.updated_at.to_s(:simple_time)%></small>
+            <small><%= report.updated_at.localtime.to_s(:simple_time)%></small>
           </td>
         </tr></tbody></table>
       </li>

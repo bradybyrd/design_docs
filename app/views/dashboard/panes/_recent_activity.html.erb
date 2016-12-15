@@ -9,7 +9,7 @@
         <% end %>
       </div>
       <div style="padding-left:10px;"><small><%= "#{audit.action}:#{audit.auditable_type}" %> - <a href='<%= audit_link(audit) %>'><%= truncate(audit.target.name, length: 40) %></a> </small><br>
-      <span class="tiny-text"><%= "#{audit.created_at.to_s(:simple_time)}-#{audit.user.try(:last_name)}" %></span>
+      <span class="tiny-text"><%= "#{audit.created_at.localtime.to_s(:simple_time)}-#{audit.user.try(:last_name)}" %></span>
     </div>
     </li>
     <% break if idx > 3 %>

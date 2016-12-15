@@ -41,9 +41,9 @@
 </div>
 <div class='col-lg-6'>
   <br><br><br>
-  <li>
-    <ul><%= link_to "Change your password", edit_user_registration_path %></ul>
-
-</li>
+  <ul>
+    <li><%= link_to "Change your password", edit_user_registration_path %></li>
+    <li><small>API token: <%= @user.auth_token %></small></li>
+</ul>
 </div>
 
