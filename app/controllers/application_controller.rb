@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
   before_filter :set_current_user
+  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
  
   def set_locale
@@ -38,5 +39,9 @@ class ApplicationController < ActionController::Base
       ## if you want render 404 page
       ## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
     end
+  end
+  
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :avatar])
   end
 end

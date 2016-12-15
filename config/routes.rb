@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'zones/add_zone' => 'zones#add_zone'
   resources :zones
   # Basins
+  get '/basins/add_basin' => 'basins#add_basin'
   get 'basins/:id/edit_form' => 'basins#edit_form'
   resources :basins
   # Companys

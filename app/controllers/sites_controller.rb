@@ -66,6 +66,7 @@ class SitesController < ApplicationController
       if @site.update(site_params)
         set_updater
         add_or_update_zones(params["zone"])
+        add_or_update_basins(params["basin"], params["zone"])
         format.html { redirect_to edit_site_path(@site, active_panel: @active_panel), notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
       else
@@ -96,6 +97,18 @@ class SitesController < ApplicationController
       end
       zone.updated_by_id = current_user.id
       zone.save!
+    end
+  end
+
+  def add_or_update_basins(basin_params, zone_params)
+    return if zone_params.nil?
+    zone_params.each do |key,val|
+      unless key.include?("new_name")
+        zone = @site.zones.find_by_id(key.gsub("name_",""))
+        basin_params.each do |id,name|
+          result = zone.basins.create(name: name)
+        end
+      end
     end
   end
   

@@ -1,4 +1,5 @@
 <div class='container'>
+  <% if current_user.company.present? %>
   <div class='row'>
     <div class='col-lg-8'>
       <h3><%= t('.welcome_back', first_name: current_user.first_name, company_name: current_user.company.name) %></h3>
@@ -22,4 +23,19 @@
     <div class='col-lg-4'>
     </div>
   </div>
+  <% else %>
+  <div class='row'>
+    <div class='col-lg-8'>
+      <h3>Welcome <%=current_user.first_name%></h3>
+      <div class="jumbotron">
+        You have just registered, your EDI contact has been notified and will assign you to a company.
+      </div>
+  </div>
+  <div class='row'>
+    <div class='col-lg-8'>
+    </div>
+    <div class='col-lg-4'>
+    </div>
+  </div>
+  <% end %>
 </div>

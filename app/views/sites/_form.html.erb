@@ -1,4 +1,5 @@
 <div class='col-lg-6'>
+  <% panel ||= 'site_info'%>
   <%= form_for(@site, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
     <% if @site.errors.any? %>
       <div id="error_explanation">

@@ -1,29 +1,28 @@
-<h2>Sign up</h2>
+<div id='reg_info'>
+  <h3>Sign up</h3>
+  
+  <div class='col-lg-6'>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+    <%= devise_error_messages! %>
+    <%= bootstrap_form_field(f, :email).html_safe  %>
+    <%= bootstrap_form_field(f, :first_name).html_safe  %>
+    <%= bootstrap_form_field(f, :last_name).html_safe  %>
+    <%= bootstrap_form_field(f, :password, password: true, placeholder: "#{@minimum_password_length} characters minimum").html_safe  %>
+    <%= bootstrap_form_field(f, :password_confirmation, password: true, placeholder: "#{@minimum_password_length} characters minimum").html_safe  %>
+    <div class="form-group" id="form-group">
+      <%= f.label 'Picture/Avatar', class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <label class="btn btn-default btn-file">
+          Select image <%= f.file_field :avatar, style: "display: none;" %>
+        </label>
+      </div>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+    <br>
+    <div class="form-actions" style="float:right;">
+      <%= f.submit("Sign Up", class: "btn-info") %>
+    </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+

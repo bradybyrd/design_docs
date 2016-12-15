@@ -16,7 +16,7 @@
           <% @users.each do |user| %>
             <tr>
               <td><%= link_to user.email, edit_user_path(user) %></td>
-              <td><%= user.company.name %></td>
+              <td><%= user.company.try(:name) %></td>
               <td><%= "#{user.first_name} #{user.last_name}" %></td>
               <td><%= user.role %></td>
               <td><%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_user_path(user) %>|<%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } unless user == current_user %></td>

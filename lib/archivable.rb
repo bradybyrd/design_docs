@@ -49,7 +49,8 @@ module Archivable
   end
   
   def modified
-    return (updated_at.present? ? updated_at.to_s(:simple_time) : '') unless self.respond_to?(:updated_by_id)
+    return "unknown" if updated_at.nil?
+    return updated_at.to_s(:simple_time) unless self.respond_to?(:updated_by_id)
     user = User.find_by_id(updated_by_id)
     "#{ user.nil? ? "unknown" : "#{user.first_name[0]}#{user.last_name}" }@#{updated_at.localtime.to_s(:simple_time)}"
   end

@@ -78,6 +78,13 @@ class BasinsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # GET /basin/add_basin
+  def add_basin
+    @form_increment = params["form_increment"]
+    @basin = Basin.new(zone_id: params["zone_id"])
+    render 'add_basin', layout: false
+  end
   
   private
     # Use callbacks to share common setup or constraints between actions.
