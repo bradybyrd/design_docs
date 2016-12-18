@@ -84,4 +84,16 @@ module PropertyMethods
     logger.info "Adding new property_value: #{property.id} - #{prop_hash["data"]}"
     property.property_values.create({holder_id: self.id, data: prop_hash["data"], created_by_id: User.current_user.id})
   end
+  
+  def help_text(field_name)
+    tip = self.display_units(field_name)
+    return "" if tip.nil?
+    tips = tip.split("||")
+    metric = self.site.metric?
+    if tips.size < 2
+      return tips[0]
+    else
+      return metric ? tips[0] : tips[1]
+    end    
+  end
 end

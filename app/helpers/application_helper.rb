@@ -70,7 +70,7 @@ module ApplicationHelper
     base_name = "props[#{property.id}[]]"
     label_class = options.fetch(:label_class, "col-sm-4 control-label")
     control_class = options.fetch(:control_class, "col-sm-8")
-    help_text = property.tip
+    help_text = property.help_text(model_holder)
     collection_mapped = property.choices.empty? ? nil : property.choices
     placeholder = property.description.present? && property.description.include?("||") ? property.description.split("||")[0] : property.name
     result = "<div class=\"form-group #{base_name.gsub("[]]","]")}\" id=\"form-group\">\n"

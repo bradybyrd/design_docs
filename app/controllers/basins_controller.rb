@@ -55,6 +55,9 @@ class BasinsController < ApplicationController
   def update
     @active_panel = params["active_panel"]
     respond_to do |format|
+      if params.has_key?("props")
+        @basin.update_properties(params["props"]) 
+      end
       if @basin.update(basin_params)
         if @active_panel.nil?
           format.html { redirect_to @basin, notice: 'Basin was successfully updated.' }

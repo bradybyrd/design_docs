@@ -66,7 +66,7 @@ class SitesController < ApplicationController
       if @site.update(site_params)
         set_updater
         add_or_update_zones(params["zone"])
-        add_or_update_basins(params["basin"], params["zone"])
+        add_or_update_basins(params["basin"], params["zone"]) if params["basin"].present?
         format.html { redirect_to edit_site_path(@site, active_panel: @active_panel), notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
       else
@@ -144,6 +144,6 @@ class SitesController < ApplicationController
     def site_params
       #(:company_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps)
       #allowed = params.keys.select{|l| }
-      params.require(:site).permit(:company_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps, :reports_attributes)
+      params.require(:site).permit(:company_id, :name, :address1, :address2, :city, :state, :zip, :phone, :gps, :units, :reports_attributes)
     end
 end

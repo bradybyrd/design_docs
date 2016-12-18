@@ -17,13 +17,13 @@
       <%= bootstrap_form_field(f, :zone_id, collection: @basin.zone.site.zones.unarchived.ordered).html_safe  %>
       <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
       <%= bootstrap_form_field(f, :basin_type, collection_mapped: Basin.basin_types.keys.map {|btype| [btype.titleize,btype]}).html_safe  %>
-      <%= bootstrap_form_field(f, :depth, placeholder: "Depth to water line in meters", help_text: "meters").html_safe  %>
-      <%= bootstrap_form_field(f, :width, placeholder: "Width of basin in meters", help_text: "meters", hidden: is_cyl).html_safe  %>
-      <%= bootstrap_form_field(f, :length, placeholder: "Length of basin in meters", help_text: "meters", hidden: is_cyl).html_safe  %>
-      <%= bootstrap_form_field(f, :diameter, placeholder: "Diameter of basin in meters", help_text: "meters", hidden: !is_cyl).html_safe  %>
-      <%= bootstrap_form_field(f, :surface_area, placeholder: "Calculated or input as square meters", help_text: "m<sup>2</sup>").html_safe  %>
+      <%= bootstrap_form_field(f, :depth, placeholder: "Depth to water line in #{@basin.help_text(:depth)}", help_text: @basin.help_text(:depth)).html_safe  %>
+      <%= bootstrap_form_field(f, :width, placeholder: "Width of basin in #{@basin.help_text(:width)}", help_text: @basin.help_text(:width), hidden: is_cyl).html_safe  %>
+      <%= bootstrap_form_field(f, :length, placeholder: "Length of basin in #{@basin.help_text(:length)}", help_text: @basin.help_text(:length), hidden: is_cyl).html_safe  %>
+      <%= bootstrap_form_field(f, :diameter, placeholder: "Diameter of basin in #{@basin.help_text(:diameter)}", help_text: @basin.help_text(:diameter), hidden: !is_cyl).html_safe  %>
+      <%= bootstrap_form_field(f, :surface_area, placeholder: "Calculated or input as #{@basin.help_text(:surface_area)}", help_text: @basin.help_text(:surface_area)).html_safe  %>
       <%= bootstrap_form_field(f, :side_slope_ratio, placeholder: "Slope as a decimal ratio", help_text: "(rise/run)").html_safe  %>
-      <%= bootstrap_form_field(f, :volume, volume: "Calculated or input as cubic meters", help_text: "m<sup>3</sup>").html_safe  %>
+      <%= bootstrap_form_field(f, :volume, volume: "Calculated or input as #{@basin.help_text(:volume)}", help_text: @basin.help_text(:volume)).html_safe  %>
       <%= hidden_field_tag "active_panel", panel %>
       <div class="form-actions" style="float:right;">
         <%= f.submit(nil, class: "btn-info") %>

@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121224705) do
+ActiveRecord::Schema.define(version: 20161215203259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
@@ -42,7 +43,6 @@ ActiveRecord::Schema.define(version: 20161121224705) do
   create_table "basins", force: :cascade do |t|
     t.integer  "zone_id"
     t.string   "name"
-    t.integer  "basin_type"
     t.float    "depth"
     t.float    "width"
     t.float    "length"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20161121224705) do
     t.integer  "updated_by_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "basin_type"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -77,7 +78,6 @@ ActiveRecord::Schema.define(version: 20161121224705) do
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "updated_by_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "archive_number"
@@ -88,15 +88,15 @@ ActiveRecord::Schema.define(version: 20161121224705) do
     t.string   "name"
     t.text     "description"
     t.string   "holder_model"
-    t.string   "category"
-    t.integer  "position"
-    t.string   "tip"
-    t.text     "choices"
     t.integer  "updated_by_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "archive_number"
     t.datetime "archived_at"
+    t.string   "category"
+    t.integer  "position"
+    t.string   "tip"
+    t.text     "choices"
   end
 
   create_table "property_values", force: :cascade do |t|
@@ -104,25 +104,24 @@ ActiveRecord::Schema.define(version: 20161121224705) do
     t.string   "data"
     t.datetime "archived_at"
     t.integer  "archived_by_id"
-    t.string   "archive_number"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "holder_id"
     t.integer  "created_by_id"
+    t.string   "archive_number"
   end
 
   create_table "reports", force: :cascade do |t|
     t.string   "name"
     t.integer  "site_id"
     t.string   "report_path"
-    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
   create_table "sites", force: :cascade do |t|
     t.integer  "company_id"
-    t.string   "name"
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
@@ -130,11 +129,13 @@ ActiveRecord::Schema.define(version: 20161121224705) do
     t.string   "zip"
     t.string   "phone"
     t.string   "gps"
-    t.integer  "updated_by_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "archive_number"
     t.datetime "archived_at"
+    t.string   "name"
+    t.integer  "updated_by_id"
+    t.string   "units"
   end
 
   create_table "users", force: :cascade do |t|
@@ -159,7 +160,7 @@ ActiveRecord::Schema.define(version: 20161121224705) do
     t.text     "comments"
     t.string   "archive_number"
     t.datetime "archived_at"
-    t.string   "photo_path"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
