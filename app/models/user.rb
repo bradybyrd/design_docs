@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   require 'base64'
   enum role: [:admin, :engineer, :reporter, :user ]
   cattr_accessor :current_user
+  attr_accessor :current_company
+  
   @@current_user = nil
   
   # Include default devise modules. Others available are:
@@ -41,6 +43,14 @@ class User < ActiveRecord::Base
       result = "/assets/no_photo.gif"
     end
     result
+  end
+  
+  def company_association
+    current_company.nil? ? self.company : self.current_company
+  end
+
+  def can_impersonate?
+    ["engineer", "admin"].include?(role) && company.master?
   end
   
   def auth_token

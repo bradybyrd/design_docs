@@ -104,7 +104,7 @@ module ApplicationHelper
       edit_site_path(audit.target.zone.site, active_panel: "basin_info_panel0")
     when "Property"
       if audit.user.present?
-        edit_site_path(audit.user.company.sites.first)
+        edit_site_path(audit.user.company_association.sites.first)
       else
         "#"
       end

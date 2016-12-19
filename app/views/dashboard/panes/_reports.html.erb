@@ -1,5 +1,5 @@
 <ul class='list-group'>
-  <% current_user.company.sites.each do |site| %>
+  <% current_user.company_association.sites.each do |site| %>
     <% site.reports.order("updated_at DESC").each do |report| %>
       <li class=list-group-item>
         <table><tbody><tr>

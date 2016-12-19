@@ -7,4 +7,6 @@ class Company < ActiveRecord::Base
   validates :name, uniqueness: true
   
   scope :ordered, -> { order("companies.archive_number DESC, companies.name")}
+  
+      
 end

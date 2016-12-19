@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   devise_for :users, :path => 'auth', controllers: {confirmations: 'confirmations'} do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
+  post '/users/:id/impersonate' => 'users#impersonate'
   resources :users
   # Reports
   resources :reports

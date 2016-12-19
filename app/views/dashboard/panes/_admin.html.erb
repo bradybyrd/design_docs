@@ -1,0 +1,20 @@
+
+<ul class='list-group'>
+  <li class=list-group-item>
+    <%= form_tag("/users/#{current_user.id}/impersonate", method: "post", class: "form-inline", role: "form") do %>
+      <div class="form-group company_impersonate" id="form-group">
+        <label class="control-label" for="user_company_id">Impersonate company:&nbsp;</label>
+          <small>
+          <%= select_tag "user[company_id]", options_from_collection_for_select(Company.unarchived.ordered, "id", "name", current_user.company_association.id), class: "btn btn-mini" %>
+        </small>
+        <div class="form-actions" style="display:inline;">
+          <small>
+          <%= submit_tag("Submit", class: "btn-info") %>
+        </small>
+        </div>
+      </div>
+      
+    <% end %>
+  </li>
+</ul>
+

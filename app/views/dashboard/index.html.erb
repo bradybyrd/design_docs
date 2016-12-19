@@ -2,10 +2,14 @@
   <% if current_user.company.present? %>
   <div class='row'>
     <div class='col-lg-8'>
-      <h3><%= t('.welcome_back', first_name: current_user.first_name, company_name: current_user.company.name) %></h3>
+      <h3><%= t('.welcome_back', first_name: current_user.first_name, company_name: current_user.company_association.name) %></h3>
+      <% if current_user.can_impersonate? %>
+        <%= render 'dashboard/panes/admin' %>
+      <% end %>
+      
       <h4><%= t('.model_information', model: t(:site))%></h4>
       <ul class='list-group'>
-        <% current_user.company.sites.unarchived.each do |site| %>
+        <% current_user.company_association.sites.unarchived.each do |site| %>
         <li class=list-group-item><span class='glyphicon glyphicon-globe' style="margin:10px; color:#36648b;"></span><%= link_to site.name, edit_site_path(site) %>&nbsp;&nbsp;<%= "#{site.zones.count}-zones, #{site.basins.count}-basins" %></li>
         <% end %>
       </ul>

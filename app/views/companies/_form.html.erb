@@ -12,6 +12,14 @@
   <% end %>
   <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
   <%= bootstrap_form_field(f, :description, text_rows: 3).html_safe  %>
+  <div class="form-group" id="form-group">
+    <label class="col-sm-4 control-label" for="master">Master Company</label>
+    <div class="col-sm-1">
+      <span class="input-group-addon">
+        <%= f.check_box :master %>
+      </span>
+    </div>
+  </div>
 
   <div class="form-actions" style="float:right;">
     <%= f.submit(nil, class: "btn-info") %>

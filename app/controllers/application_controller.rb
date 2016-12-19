@@ -11,9 +11,21 @@ class ApplicationController < ActionController::Base
   end
   
   def set_current_user
-    User.current_user = current_user unless current_user.nil?
     logger.info "SS__ CurrentUser: #{current_user.inspect} - #{current_user.nil?}"
-    
+    unless current_user.nil?
+      User.current_user = current_user
+      current_user.current_company = Company.find_by_id(cookies[:company_id]) if current_user.can_impersonate? && cookies[:company_id]
+    end
+  end
+  
+  def cookie_manager(actions = {})
+    actions.each do |key,val|
+      if key == :login
+        cookies[:login] = { value: val.email, expires: 4.hours.from_now }
+      elsif key == :impersonate
+        cookies[:company_id] = { value: val }
+      end
+    end 
   end
   
   protected
@@ -33,6 +45,7 @@ class ApplicationController < ActionController::Base
   
   def authenticate_user!(opts = {})
     if user_signed_in?
+      cookie_manager({login: current_user})
       super opts
     else
       redirect_to login_path, :notice => 'Please log in'

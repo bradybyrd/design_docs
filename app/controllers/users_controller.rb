@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   !before_action :authenticate_user!
   before_action :admin_only, :except => :show
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :impersonate]
   MINIMUM_PASSWORD_LENGTH = 8
   
   def index
@@ -8,7 +9,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
     unless current_user.admin?
       unless @user == current_user
         redirect_to :back, :alert => "Access denied."
@@ -32,7 +32,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       redirect_to users_path, :notice => "User updated."
     else
@@ -44,12 +43,23 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:id])
-    user.archive
+    @user.archive
     redirect_to users_path, :notice => "User deleted."
   end
 
+  def impersonate
+    if user_params[:company_id]
+      @user.current_company = Company.find_by_id(user_params[:company_id])
+      cookie_manager({impersonate: @user.current_company.id })
+    end
+    redirect_to "/"
+  end
+  
   private
+  
+  def set_user
+    @user = User.find(params[:id])
+  end 
 
   def admin_only
     unless current_user.admin?
