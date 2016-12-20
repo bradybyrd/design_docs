@@ -22,6 +22,16 @@ module DesignDocs
     config.i18n.default_locale = :en
     config.autoload_paths << Rails.root.join('lib')
 
+    # Initialize the global settings
+    settings_file = File.join(Rails.root, 'config', 'global_settings.yml')
+    if File.exist?(settings_file)
+      GLOBAL_SETTINGS = YAML.load_file(settings_file)
+      puts "Loading global settings from: #{settings_file}"
+    else
+      # if there is settings file load the default 
+      GLOBAL_SETTINGS = {}
+    end
+    
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
   end

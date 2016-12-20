@@ -1,0 +1,4 @@
+# Global Settings for Application
+
+# Session timeout in hours
+session_timeout: 2
