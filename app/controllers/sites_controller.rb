@@ -39,7 +39,8 @@ class SitesController < ApplicationController
       if @site.save
         set_updater
         if params[:site]["initial_zone"]
-          @site.zones.create(name: params[:site]["initial_zone"], updated_by_id: current_user.id)
+          zone = @site.zones.create(name: params[:site]["initial_zone"], updated_by_id: current_user.id)
+          basin = zone.basins.create(name: "Tank1")
         end
         if params[:reports_attributes]
           params[:reports_attributes].each do |report|

@@ -30,6 +30,12 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.save
+        if params[:site] && params[:site][:name].length > 2
+          site = @company.sites.create(name: params[:site][:name])
+          zone = site.zones.create(name: "Zone1")
+          basin = zone.basins.create(name: "Tank1")
+         end 
+          
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else

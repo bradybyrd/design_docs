@@ -33,6 +33,7 @@ module ApplicationHelper
   def bootstrap_form_field(form_ref, field, options = {})
     field_class_name = "#{form_ref.object.class.name.underscore.downcase}_#{field}"
     label_class = options.fetch(:label_class, "col-sm-4 control-label")
+    label_value = options.fetch(:label_value, field.to_s)
     control_class = options.fetch(:control_class, "col-sm-8")
     is_hidden = options.fetch(:hidden, false)
     help_text = options.fetch(:help_text, nil)
@@ -47,7 +48,7 @@ module ApplicationHelper
     placeholder = options.fetch(:placeholder, field.to_s)
     result = "<div class=\"form-group #{field_class_name}\" id=\"form-group\">\n"
     result.gsub!("id=", "style=\"display:none;\" id=") if is_hidden
-    result += form_ref.label field, class: label_class
+    result += form_ref.label label_value, class: label_class
     result += "\n<div class=\"#{control_class}\">\n"
     if !collection_mapped.nil?
       result += form_ref.select(field, collection_mapped, {}, {class: "form-control", id: field_class_name})
@@ -93,21 +94,26 @@ module ApplicationHelper
   
   def audit_link(audit)
     audit_id = audit.auditable_id
-    case audit.auditable_type
-    when "Company"
-      edit_company_path(audit.target)
-    when "Site"
-      edit_site_path(audit.target, active_panel: "site_basics_panel")
-    when "Zone"
-      edit_site_path(audit.target.site, active_panel: "influent_panel_1")
-    when "Basin"
-      edit_site_path(audit.target.zone.site, active_panel: "basin_info_panel0")
-    when "Property"
-      if audit.user.present?
-        edit_site_path(audit.user.company_association.sites.first)
-      else
-        "#"
+    begin
+      case audit.auditable_type
+      when "Company"
+        edit_company_path(audit.target)
+      when "Site"
+        edit_site_path(audit.target, active_panel: "site_basics_panel")
+      when "Zone"
+        edit_site_path(audit.target.site, active_panel: "influent_panel_1")
+      when "Basin"
+        edit_site_path(audit.target.zone.site, active_panel: "basin_info_panel0")
+      when "Property"
+        if audit.user.present?
+          edit_site_path(audit.user.company_association.sites.first)
+        else
+          "#"
+        end
       end
+    rescue => e
+      Rails.logger.info "AuditLink Error: #{audit.inspect}"
+      return "#"
     end
   end
   

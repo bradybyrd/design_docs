@@ -1,4 +1,7 @@
-<% @basin = basin if defined?(basin) %>
+<% 
+@basin = basin if defined?(basin) 
+panel ||= ""
+%>
 <div id='basin_info'>
   <div class='col-lg-6'>
     <%= form_for(@basin, html: {class: 'form-horizontal edit_basin', role: 'form'}) do |f| %>

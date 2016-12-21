@@ -12,6 +12,7 @@
   <% end %>
   <%= bootstrap_form_field(f, :name, placeholder: "Give it a name").html_safe  %>
   <%= bootstrap_form_field(f, :description, text_rows: 3).html_safe  %>
+  <%= bootstrap_form_field(f, "site[name]", label_value: "Site name", placeholder: "Name for initial site").html_safe  %>
   <div class="form-group" id="form-group">
     <label class="col-sm-4 control-label" for="master">Master Company</label>
     <div class="col-sm-1">

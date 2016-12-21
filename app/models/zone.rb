@@ -4,7 +4,7 @@ class Zone < ActiveRecord::Base
   audited
   acts_as_commentable
   
-  has_many :basins
+  has_many :basins, dependent: :destroy
   belongs_to :site
 
   before_save :set_modified

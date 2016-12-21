@@ -22,7 +22,7 @@
               <td><%= site.city %></td>
               <td><%= site.state %></td>
               <td><%= site.phone %></td>
-              <td><%= link_to 'Edit', edit_site_path(site) %>|<%=link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_site_path(site) %>|<%= link_to "<span class='glyphicon glyphicon-remove'></span>".html_safe, site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tbody>
