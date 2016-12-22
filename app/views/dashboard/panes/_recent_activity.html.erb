@@ -1,5 +1,5 @@
 <ul class='list-group'>
-  <% Audit.recent_x.each_with_index do |audit, idx| %>
+  <% Audit.recent_x.for_user(current_user).each_with_index do |audit, idx| %>
     <li class=list-group-item>
       <div class="circle-image-div" style="float:left;margin-right:10px;">
         <% if audit.user.present? %>
